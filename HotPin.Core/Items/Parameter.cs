@@ -5,10 +5,14 @@ using System.Text;
 namespace HotPin
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class Parameter : Attribute
+    public class Description : Attribute
     {
-        public string Description { get; set; }
+        public string Value { get; set; }
 
+        public Description(string value)
+        {
+            Value = value;
+        }
 
         public static string GetDocumentation(Type type)
         {
@@ -27,13 +31,13 @@ namespace HotPin
 
             foreach (PropertyInfo property in properties)
             {
-                Parameter parameter = property.GetCustomAttribute<Parameter>();
+                Description parameter = property.GetCustomAttribute<Description>();
 
                 if (parameter != null)
                 {
                     output.AppendLine(property.Name);
                     output.Append("    ");
-                    output.AppendLine(parameter.Description);
+                    output.AppendLine(parameter.Value);
 
                     Type docType = property.PropertyType;
                     if (property.PropertyType.IsGenericType)

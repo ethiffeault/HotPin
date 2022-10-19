@@ -137,7 +137,7 @@ namespace HotPin
             {
                 SetJsonControlText(GetNodeJson(selectedNode), false);
                 if (selectedNode.Tag is Item item)
-                    textBoxDocumentation.Text = Parameter.GetDocumentation(item.GetType());
+                    textBoxDocumentation.Text = Description.GetDocumentation(item.GetType());
                 else
                     textBoxDocumentation.Text = "";
             }

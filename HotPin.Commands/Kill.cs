@@ -16,17 +16,16 @@ namespace HotPin.Commands
     public class Kill : Command
     {
         static readonly Image KillImage = Resources.Kill;
-
         public override Image Image => KillImage;
 
-        [Parameter(Description =
+        [Description(
 @"How to match the process name
     Contain: check if Match is in the process name
     Equal: Match need to be exactly process name
     Regex: perform a regex comparison using Match")]
         public KillType Type { get; set; } = KillType.Contain;
 
-        [Parameter(Description = "Compare string again process name")]
+        [Description("Compare string again process name")]
         public string Match { get; set; } = "SomeProcessName";
 
         protected override async Task OnExecute()

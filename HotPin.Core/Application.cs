@@ -128,6 +128,7 @@ Have Fun!";
             Form.Visible = !Form.Visible;
             if (Form.Visible)
             {
+                // bring to front if needed
                 Form.Activate();
                 Form.Focus();
             }

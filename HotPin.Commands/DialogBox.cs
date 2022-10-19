@@ -6,14 +6,13 @@ namespace HotPin.Commands
     public class DialogBox : Command
     {
         static readonly Image DialogBoxImage = Resources.DialogBox;
+        public override Image Image => DialogBoxImage;
 
-        [Parameter(Description = "dialog title")]
+        [Description("dialog title")]
         public string Title { get; set; } = Application.Name;
 
-        [Parameter(Description = "dialog message")]
+        [Description("dialog message")]
         public string Message { get; set; } = $"Welcome to {Application.Name}!";
-
-        public override Image Image => DialogBoxImage;
 
         protected override async Task OnExecute()
         {

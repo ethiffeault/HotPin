@@ -11,16 +11,16 @@ namespace HotPin.Commands
         static readonly Image RunImage = Resources.Run;
         public override Image Image => RunImage;
 
-        [Parameter(Description = "exe full path")]
+        [Description("exe full path")]
         public string Path { get; set; } = "c:\\some\\path\\app.exe";
 
-        [Parameter(Description = "working directory of the exe, may be empty")]
+        [Description("working directory of the exe, may be empty")]
         public string WorkingDir { get; set; } = "";
 
-        [Parameter(Description = "arguments passed to the exe")]
+        [Description("arguments passed to the exe")]
         public string Arguments { get; set; } = "";
 
-        [Parameter(Description = "wait for exe to exit to execute next command")]
+        [Description("wait for exe to exit to execute next command")]
         public bool WaitForExit { get; set; } = false;
 
         protected override async Task OnExecute()
