@@ -1,5 +1,4 @@
 ﻿using HotPin.Properties;
-using System.IO;
 using System.Windows.Forms;
 
 namespace HotPin

@@ -161,5 +161,15 @@
   <ItemGroup>
     <Content Include="HotPin.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HotPin.Commands\HotPin.Commands.csproj">
+      <Project>{fdd846cc-433f-4856-86c4-c6794ba7d887}</Project>
+      <Name>HotPin.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HotPin.Core\HotPin.Core.csproj">
+      <Project>{ce45191c-98da-4271-9319-5a51fe08ee3f}</Project>
+      <Name>HotPin.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
