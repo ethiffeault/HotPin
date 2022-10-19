@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>HotPin.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ScintillaNET">
       <HintPath>External\ScintillaNET.dll</HintPath>
@@ -50,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Application.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Commands\DialogBox.cs" />
@@ -87,6 +96,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runable.cs" />
     <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\JsonControl.resx">
       <DependentUpon>JsonControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +151,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\Default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\DialogBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\HotPin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HotPin.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

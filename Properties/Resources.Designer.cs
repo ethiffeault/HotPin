@@ -83,6 +83,16 @@ namespace HotPin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DialogBox {
+            get {
+                object obj = ResourceManager.GetObject("DialogBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Folder {
             get {
                 object obj = ResourceManager.GetObject("Folder", resourceCulture);
@@ -97,6 +107,16 @@ namespace HotPin.Properties {
             get {
                 object obj = ResourceManager.GetObject("HotPin", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HotPin1 {
+            get {
+                object obj = ResourceManager.GetObject("HotPin1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

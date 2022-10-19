@@ -12,6 +12,7 @@ namespace HotPin
             this.hotKeyForm = hotKeyForm;
             Application.Instance.ProjectLoaded += ProjectLoaded;
             Application.Instance.ProjectSaved += ProjectSaved;
+            Application.Instance.ProjectClosed += ProjectClosed;
             hotKeyForm.HotKeyPressed += HotKeyFormHotKeyPressed;
         }
 
@@ -31,6 +32,12 @@ namespace HotPin
         private void ProjectSaved()
         {
             Refresh();
+        }
+
+        private void ProjectClosed()
+        {
+            hotKeyPlaylist.Clear();
+            hotKeyForm.UnregisterAll();
         }
 
         private void Refresh()
@@ -64,6 +71,11 @@ namespace HotPin
         public void RunPlaylist(Playlist playlist)
         {
             _ = playlist.Run();
+        }
+
+        public void RunCommand(Command command)
+        {
+            _ = command.Run();
         }
     }
 }

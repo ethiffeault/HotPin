@@ -76,7 +76,7 @@ namespace HotPin
             Text = Title + "*";
         }
 
-        private void MainMenuFileSaveClick(object sender, System.EventArgs e)
+        private void MenuItemFileSaveClick(object sender, System.EventArgs e)
         {
             if (projectDirty)
             {
@@ -84,44 +84,60 @@ namespace HotPin
             }
         }
 
-        private void MainMenuFileExit(object sender, System.EventArgs e)
+        private void MenuItemFileExit(object sender, System.EventArgs e)
         {
             Application.Instance.Exit();
         }
 
-        private void MainMenuFileLoad(object sender, System.EventArgs e)
+        private void MenuItemFileLoad(object sender, System.EventArgs e)
         {
             Application.Instance.LoadProject();
         }
 
-        private void DebugLogLevelMenuItem_DropDownOpened(object sender, System.EventArgs e)
+        private void MenuItemDebugLogLevelDropDownOpened(object sender, System.EventArgs e)
         {
-            DebugLogLevelInfoMenuItem.Checked = Log.Setting.LogLevel == LogLevel.Info;
-            DebugLogLevelWarningMenuItem.Checked = Log.Setting.LogLevel == LogLevel.Warning;
-            DebugLogLevelErrorMenuItem.Checked = Log.Setting.LogLevel == LogLevel.Error;
+            menuItemDebugLogLevelInfo.Checked = Log.Setting.LogLevel == LogLevel.Info;
+            menuItemDebugLogLevelInfoWarning.Checked = Log.Setting.LogLevel == LogLevel.Warning;
+            menuItemDebugLogLevelInfoError.Checked = Log.Setting.LogLevel == LogLevel.Error;
         }
 
-        private void DebugLogLevelInfoMenuItem_Click(object sender, System.EventArgs e)
+        private void MenuItemDebugLogLevelInfoClick(object sender, System.EventArgs e)
         {
             Log.Setting.LogLevel = LogLevel.Info;
             Settings.Save();
         }
 
-        private void DebugLogLevelWarningMenuItem_Click(object sender, System.EventArgs e)
+        private void MenuItemDebugLogLevelWarningClick(object sender, System.EventArgs e)
         {
             Log.Setting.LogLevel = LogLevel.Warning;
             Settings.Save();
         }
 
-        private void DebugLogLevelErrorMenuItem_Click(object sender, System.EventArgs e)
+        private void MenuItemDebugLogLevelErrorClick(object sender, System.EventArgs e)
         {
             Log.Setting.LogLevel = LogLevel.Error;
             Settings.Save();
         }
 
-        private void openLogToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void MenuItemDebugLogOpenClick(object sender, System.EventArgs e)
         {
             Log.Open();
+        }
+
+        private void MenuItemToolsConfigurationOpenClick(object sender, System.EventArgs e)
+        {
+            Settings.Open();
+        }
+
+        private void MenuItemToolsConfigurationReloadClick(object sender, System.EventArgs e)
+        {
+            Settings.Load();
+        }
+
+        private void MenuItemHelpAboutClick(object sender, System.EventArgs e)
+        {
+            AboutForm aboutForm = new AboutForm();
+            aboutForm.ShowDialog(this);
         }
     }
 }

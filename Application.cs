@@ -8,16 +8,17 @@ namespace HotPin
     {
         public static Application Instance { get; private set; }
 
-        private NotifyIcon trayIcon;
-        private MainForm mainForm;
+        public MainForm Form { get; private set; }
         public Project Project { get; private set; }
 
         public Action ProjectSaving;
         public Action ProjectSaved;
         public Action ProjectLoaded;
+        public Action ProjectClosed;
 
-        private Executor executor;
-        public bool closed = false;
+        private NotifyIcon trayIcon;
+        public Executor Executor { get; private set; }
+        public bool closing = false;
 
         public Application()
         {
@@ -25,12 +26,12 @@ namespace HotPin
 
             Instance = this;
 
-            mainForm = new MainForm();
-            executor = new Executor(mainForm);
+            Form = new MainForm();
+            Executor = new Executor(Form);
 
-            mainForm.Show();
+            Form.Show();
             if (!System.Diagnostics.Debugger.IsAttached)
-                mainForm.Visible = false;
+                Form.Visible = false;
 
             // Initialize Tray Icon
             trayIcon = new NotifyIcon()
@@ -50,14 +51,17 @@ namespace HotPin
 
         void HideShowMainForm(object sender = null, EventArgs e = null)
         {
-            mainForm.Visible = !mainForm.Visible;
+            Form.Visible = !Form.Visible;
         }
 
         public void Exit(object sender = null, EventArgs e = null)
         {
-            if (!closed)
+            if (!closing)
             {
-                mainForm.ForceClose();
+                closing = true;
+
+                ProjectClosed?.Invoke();
+                Form.ForceClose();
 
                 // Hide tray icon, otherwise it will remain shown until user mouses over it
                 trayIcon.Visible = false;
@@ -65,7 +69,6 @@ namespace HotPin
 
                 Log.Info("Closing HotPin", "HotPin");
                 Settings.Save();
-                closed = true;
             }
         }
 

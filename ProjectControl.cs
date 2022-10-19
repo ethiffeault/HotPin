@@ -342,7 +342,7 @@ namespace HotPin
 
         private TreeNode LoadItem(Item item, bool clone = true)
         {
-            TreeNode treeNode = new TreeNode(item.Name);
+            TreeNode treeNode = new TreeNode(item.ToString());
             treeNode.ImageIndex = GetImageIndex(item.Image);
             treeNode.SelectedImageIndex = GetImageIndex(item.Image);
             treeNode.Tag = item;

@@ -6,7 +6,7 @@ namespace HotPin
 {
     public class Settings
     {
-        private static Settings Instance { get; } = Settings.Load();
+        private static Settings Instance { get; set; } = null;
         public static string SettingsFile { get => Path.Combine(new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName, "HotPin.settings.json"); }
 
         private Dictionary<string, Entry> Entries = new Dictionary<string, Entry>();
@@ -16,8 +16,9 @@ namespace HotPin
             public int Version = 0;
         }
 
-        public Settings()
+        static Settings()
         {
+            Load();
         }
 
         public static T Get<T>(int version = 0) where T : Entry, new()
@@ -48,7 +49,7 @@ namespace HotPin
             }
         }
 
-        public static Settings Load()
+        public static void Load()
         {
             Settings settings = null;
             if (File.Exists(SettingsFile))
@@ -67,7 +68,7 @@ namespace HotPin
                 settings = new Settings();
             }
 
-            return settings;
+            Instance = settings;
         }
 
         public static void Save()
@@ -80,6 +81,12 @@ namespace HotPin
             {
                 Log.Error($"Error saving settings: {SettingsFile}, {ex.Message}");
             }
+        }
+
+        public static void Open()
+        {
+            if (File.Exists(SettingsFile))
+                System.Diagnostics.Process.Start(SettingsFile);
         }
 
     }
