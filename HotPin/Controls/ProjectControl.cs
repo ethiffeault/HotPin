@@ -30,6 +30,14 @@ namespace HotPin
             treeView.GotFocus += TreeViewGotFocus;
 
             jsonControl.ContentChanged += JsonControlContentChanged;
+
+            contextMenuPlaylistAddCommand.Image = Application.Resources.Plus;
+            contextMenuPlaylistDelete.Image = Application.Resources.Minus;
+            contextMenuFolderAddFolder.Image = Application.Resources.Plus;
+            contextMenuFolderAddPlaylist.Image = Application.Resources.Playlist;
+            contextMenuFolderDelete.Image = Application.Resources.Minus;
+            contextMenuCommandDelete.Image = Application.Resources.Minus;
+
         }
 
         private void SetSelectedNodeDirty(bool value)
@@ -67,6 +75,12 @@ namespace HotPin
                 selectedNode = treeView.SelectedNode;
                 OnSelectedNodeChange();
             }
+        }
+
+        private void SetSelectecedNode(TreeNode node)
+        {
+            treeView.SelectedNode = node;
+            UpdateSelectedNode();
         }
 
         private void ApplyNodeChange()
@@ -340,16 +354,46 @@ namespace HotPin
             return index;
         }
 
+        private TreeNode CreateTreeNode(Folder folder)
+        {
+            TreeNode treeNode = new TreeNode();
+            treeNode.Text = folder.ToString();
+            treeNode.Tag = folder;
+            treeNode.ImageIndex = GetImageIndex(folder.Image);
+            treeNode.SelectedImageIndex = GetImageIndex(folder.Image);
+            treeNode.ContextMenuStrip = contextMenuFolder;
+            return treeNode;
+        }
+
+        private TreeNode CreateTreeNode(Playlist playlist)
+        {
+            TreeNode treeNode = new TreeNode();
+            treeNode.Text = playlist.ToString();
+            treeNode.Tag = playlist;
+            treeNode.ImageIndex = GetImageIndex(playlist.Image);
+            treeNode.SelectedImageIndex = GetImageIndex(playlist.Image);
+            treeNode.ContextMenuStrip = contextMenuPlaylist;
+            return treeNode;
+        }
+
+        private TreeNode CreateTreeNode(Command command)
+        {
+            TreeNode treeNode = new TreeNode();
+            treeNode.Text = command.ToString();
+            treeNode.Tag = command;
+            treeNode.ImageIndex = GetImageIndex(command.Image);
+            treeNode.SelectedImageIndex = GetImageIndex(command.Image);
+            treeNode.ContextMenuStrip = contextMenuCommand;
+            return treeNode;
+        }
+
         private TreeNode LoadItem(Item item, bool clone = true)
         {
-            TreeNode treeNode = new TreeNode(item.ToString());
-            treeNode.ImageIndex = GetImageIndex(item.Image);
-            treeNode.SelectedImageIndex = GetImageIndex(item.Image);
-            treeNode.Tag = item;
-
+            TreeNode treeNode = null;
             if (item is Playlist itemPlaylist)
             {
                 Playlist playlist = clone ? Item.Clone(itemPlaylist) : itemPlaylist;
+                treeNode = CreateTreeNode(playlist);
                 foreach (Command command in itemPlaylist.Commands)
                 {
                     TreeNode childNode = LoadItem(command, false);
@@ -360,10 +404,13 @@ namespace HotPin
             else if (item is Command itemCommand)
             {
                 Command command = clone ? Item.Clone(itemCommand) : itemCommand;
+                treeNode = CreateTreeNode(command);
             }
             else if (item is Folder itemFolder)
             {
+
                 Folder folder = clone ? Item.Clone(itemFolder) : itemFolder;
+                treeNode = CreateTreeNode(folder);
                 foreach (Item child in folder.Children)
                 {
                     TreeNode childNode = LoadItem(child, false);
@@ -376,7 +423,6 @@ namespace HotPin
                 throw new NotImplementedException();
             }
             return treeNode;
-
         }
 
         private void ButtonApplyClick(object sender, EventArgs e)
@@ -392,5 +438,111 @@ namespace HotPin
                 SetSelectedNodeDirty(false);
             }
         }
+
+        private void ContextMenuDeleteClick(object sender, EventArgs e)
+        {
+            if (e is MouseEventArgs mouseEventArgs)
+            {
+                if (mouseEventArgs.Button != MouseButtons.Left)
+                    return;
+            }
+            if (selectedNode == null)
+                return;
+
+            selectedNode.Remove();
+        }
+
+        private void AddNewFolder()
+        {
+            TreeNodeCollection parent = null;
+
+            if (selectedNode == null)
+            {
+                parent = treeView.Nodes;
+            }
+            else if (selectedNode.Tag is Folder)
+            {
+                parent = selectedNode.Nodes;
+            }
+
+            if (parent != null)
+            {
+                Folder newFolder = new Folder();
+                newFolder.Name = "New Folder";
+                TreeNode treeNode = CreateTreeNode(newFolder);
+                parent.Add(treeNode);
+                SetSelectecedNode(treeNode);
+            }
+        }
+
+        private void AddNewPlaylist()
+        {
+            if (selectedNode == null)
+                return;
+
+            if (selectedNode.Tag is Folder)
+            {
+                Playlist newPlaylist = new Playlist();
+                newPlaylist.Name = "New Playlist";
+                TreeNode treeNode = CreateTreeNode(newPlaylist);
+                selectedNode.Nodes.Add(treeNode);
+                SetSelectecedNode(treeNode);
+            }
+        }
+
+        private void AddNewCommand(Command command)
+        {
+            if (selectedNode == null)
+                return;
+
+            if (selectedNode.Tag is Playlist)
+            {
+                TreeNode treeNode = CreateTreeNode(command);
+                selectedNode.Nodes.Add(treeNode);
+                SetSelectecedNode(treeNode);
+            }
+        }
+
+        private void ContextMenuFolderAddFolderClick(object sender, EventArgs e)
+        {
+            if (e is MouseEventArgs mouseEventArgs)
+            {
+                if (mouseEventArgs.Button != MouseButtons.Left)
+                    return;
+            }
+            AddNewFolder();
+        }
+
+        private void ContextMenuFolderPlaylistClick(object sender, EventArgs e)
+        {
+            if (e is MouseEventArgs mouseEventArgs)
+            {
+                if (mouseEventArgs.Button != MouseButtons.Left)
+                    return;
+            }
+            AddNewPlaylist();
+        }
+
+        private void ContextMenuPlaylistOpening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            List<Command> commands = Application.Instance.Project.GetItemsOfType<Command>();
+
+            List<Type> commandTypes = Utils.GetTypeInAssemblies(typeof(Command), false, Application.Instance.CommandAssemblies.ToArray());
+
+            contextMenuPlaylistAddCommand.DropDownItems.Clear();
+            foreach (Type commandType in commandTypes)
+            {
+                Command command = Activator.CreateInstance(commandType) as Command;
+                command.Name = $"New {commandType.Name}";
+                ToolStripMenuItem menuItem = new ToolStripMenuItem(commandType.Name, command.Image);
+                menuItem.Click += new EventHandler(
+                delegate (object menuItemSender, EventArgs menuItemEvent)
+                {
+                    AddNewCommand(command);
+                });
+                contextMenuPlaylistAddCommand.DropDownItems.Add(menuItem);
+            }
+        }
+
     }
 }

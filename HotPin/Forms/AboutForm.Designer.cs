@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.textBox = new System.Windows.Forms.TextBox();
+            this.buttonOk = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,11 +54,24 @@
             this.textBox.TabIndex = 1;
             this.textBox.Text = "HotPin\r\nversion 1.0.0";
             // 
+            // buttonOk
+            // 
+            this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonOk.Location = new System.Drawing.Point(299, 135);
+            this.buttonOk.Name = "buttonOk";
+            this.buttonOk.Size = new System.Drawing.Size(75, 23);
+            this.buttonOk.TabIndex = 2;
+            this.buttonOk.Text = "Ok";
+            this.buttonOk.UseVisualStyleBackColor = true;
+            // 
             // AboutForm
             // 
+            this.AcceptButton = this.buttonOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 140);
+            this.CancelButton = this.buttonOk;
+            this.ClientSize = new System.Drawing.Size(384, 166);
+            this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.pictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -79,5 +93,6 @@
 
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.TextBox textBox;
+        private System.Windows.Forms.Button buttonOk;
     }
 }

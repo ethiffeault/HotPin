@@ -15,10 +15,5 @@ namespace HotPin.Commands
         {
             MessageBoxEx.Show(Message, Title);
         }
-
-        public override string ToString()
-        {
-            return $"DialogBox : {Name}";
-        }
     }
 }

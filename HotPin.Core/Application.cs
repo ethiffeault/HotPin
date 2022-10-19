@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -20,6 +21,7 @@ namespace HotPin
         public Project Project { get; private set; }
         public Executor Executor { get; private set; }
         public bool DebugMode { get; } = System.Diagnostics.Debugger.IsAttached;
+        public List<Assembly> CommandAssemblies { get; private set; } = new List<Assembly>();
 
         public Action ProjectSaving;
         public Action ProjectSaved;
@@ -27,8 +29,10 @@ namespace HotPin
         public Action ProjectClosed;
         public Action ForceClose;
 
+
         private NotifyIcon trayIcon;
         private bool closing = false;
+
 
         // expose resources
         public static class Resources
@@ -40,12 +44,15 @@ namespace HotPin
             public static readonly Image Exit = Core.Resources.Exit;
             public static readonly Image Configuration = Core.Resources.Configuration;
             public static readonly Image Open = Core.Resources.Open;
-            public static readonly Image Reload = Core.Resources.Open;
+            public static readonly Image Reload = Core.Resources.Reload;
             public static readonly Image Log = Core.Resources.Log;
             public static readonly Image Info = Core.Resources.Info;
             public static readonly Image Warning = Core.Resources.Warning;
             public static readonly Image Error = Core.Resources.Error;
             public static readonly Image Level = Core.Resources.Level;
+            public static readonly Image Plus = Core.Resources.Plus;
+            public static readonly Image Minus = Core.Resources.Minus;
+            public static readonly Image Playlist = Core.Resources.Playlist;
         }
 
         public Application()
@@ -106,7 +113,7 @@ To always have tray icon visible:
                 if (commandFile.EndsWith(".dll"))
                 {
                     Log.Info($"Loading commands from {new FileInfo(commandFile).Name}");
-                    Assembly.LoadFile(commandFile);
+                    CommandAssemblies.Add(Assembly.LoadFile(commandFile));
                 }
             }
         }
