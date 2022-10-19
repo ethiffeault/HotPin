@@ -10,12 +10,23 @@ namespace HotPin
 
         private NotifyIcon trayIcon;
         private MainForm mainForm;
+        public Project Project { get; private set; }
+
+        public Action ProjectSaving;
+        public Action ProjectSaved;
+        public Action ProjectLoaded;
+
+        private Executor executor;
+        public bool closed = false;
 
         public Application()
         {
+            Log.Info("Starting HotPin!", "HotPin");
+
             Instance = this;
 
             mainForm = new MainForm();
+            executor = new Executor(mainForm);
 
             mainForm.Show();
             if (!System.Diagnostics.Debugger.IsAttached)
@@ -34,14 +45,7 @@ namespace HotPin
 
             trayIcon.MouseDoubleClick += HideShowMainForm;
 
-            HotKey hotKey = new HotKey(Keys.H, HotKeyModifiers.Control);
-            mainForm.RegisterHotKey(hotKey);
-            mainForm.HotKeyPressed += new EventHandler<HotKeyEventArgs>(HotKeyManager_HotKeyPressed);
-        }
-
-        void HotKeyManager_HotKeyPressed(object sender, HotKeyEventArgs e)
-        {
-            Exit();
+            LoadProject();
         }
 
         void HideShowMainForm(object sender = null, EventArgs e = null)
@@ -51,11 +55,31 @@ namespace HotPin
 
         public void Exit(object sender = null, EventArgs e = null)
         {
-            mainForm.ForceClose();
+            if (!closed)
+            {
+                mainForm.ForceClose();
 
-            // Hide tray icon, otherwise it will remain shown until user mouses over it
-            trayIcon.Visible = false;
-            System.Windows.Forms.Application.Exit();
+                // Hide tray icon, otherwise it will remain shown until user mouses over it
+                trayIcon.Visible = false;
+                System.Windows.Forms.Application.Exit();
+
+                Log.Info("Closing HotPin", "HotPin");
+                Settings.Save();
+                closed = true;
+            }
+        }
+
+        public void SaveProject()
+        {
+            ProjectSaving?.Invoke();
+            Project.Save(Project);
+            ProjectSaved?.Invoke();
+        }
+
+        public void LoadProject()
+        {
+            Project = Project.Load();
+            ProjectLoaded?.Invoke();
         }
     }
 }

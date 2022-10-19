@@ -6,7 +6,6 @@ using System.Windows.Forms;
 
 namespace HotPin
 {
-
     [Flags]
     public enum HotKeyModifiers
     {
@@ -65,19 +64,27 @@ namespace HotPin
         {
             if (Registered.ContainsKey(hotKey))
                 return;
-
             int id = Interlocked.Increment(ref Id);
-            this.Invoke(new RegisterHotKeyDelegate(RegisterHotKeyInternal), Handle, id, (uint)hotKey.Modifiers, (uint)hotKey.Key);
-
             Registered.Add(hotKey, id);
+            RegisterHotKeyInternal(Handle, id, (uint)hotKey.Modifiers, (uint)hotKey.Key);
         }
 
         public void UnregisterHotKey(HotKey hotKey)
         {
             if (Registered.TryGetValue(hotKey, out int id))
             {
-                Invoke(new UnRegisterHotKeyDelegate(UnRegisterHotKeyInternal), Handle, id);
+                Registered.Remove(hotKey);
+                UnRegisterHotKeyInternal(Handle, id);
             }
+        }
+
+        public void UnregisterAll()
+        {
+            foreach (int id in Registered.Values)
+            {
+                UnRegisterHotKeyInternal(Handle, id);
+            }
+            Registered.Clear();
         }
 
         // protected
@@ -87,46 +94,34 @@ namespace HotPin
             if (m.Msg == WM_HOTKEY)
             {
                 HotKeyEventArgs e = new HotKeyEventArgs(m.LParam);
-                OnHotKeyPressed(e);
+                HotKeyPressed?.Invoke(this, e);
             }
 
             base.WndProc(ref m);
         }
 
-
         // private
-
-        private delegate void RegisterHotKeyDelegate(IntPtr hwnd, int id, uint modifiers, uint key);
-        private delegate void UnRegisterHotKeyDelegate(IntPtr hwnd, int id);
 
         private void RegisterHotKeyInternal(IntPtr hwnd, int id, uint modifiers, uint key)
         {
-            RegisterHotKey(hwnd, id, modifiers, key);
+            User32RegisterHotKey(hwnd, id, modifiers, key);
         }
 
         private void UnRegisterHotKeyInternal(IntPtr hwnd, int id)
         {
-            UnregisterHotKey(Handle, id);
+            User32UnregisterHotKey(Handle, id);
         }
 
-        private void OnHotKeyPressed(HotKeyEventArgs e)
-        {
-            if (HotKeyPressed != null)
-            {
-                HotKeyPressed(null, e);
-            }
-        }
-
-        // window dll functions
+        // window user32
 
         private static int Id = 0;
         private const int WM_HOTKEY = 0x312;
 
-        [DllImport("user32", SetLastError = true)]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
+        [DllImport("user32", EntryPoint = "RegisterHotKey", SetLastError = true)]
+        private static extern bool User32RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
 
-        [DllImport("user32", SetLastError = true)]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+        [DllImport("user32", EntryPoint = "UnregisterHotKey", SetLastError = true)]
+        private static extern bool User32UnregisterHotKey(IntPtr hWnd, int id);
 
     }
 
