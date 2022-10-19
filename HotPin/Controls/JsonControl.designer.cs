@@ -37,7 +37,6 @@
             this.SearchTxt = new System.Windows.Forms.TextBox();
             this.linterTimer = new System.Windows.Forms.Timer(this.components);
             this.scintillaPanel = new System.Windows.Forms.Panel();
-            this.contextTextBox = new System.Windows.Forms.TextBox();
             this.PanelSearch.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,23 +122,10 @@
             this.scintillaPanel.Size = new System.Drawing.Size(853, 421);
             this.scintillaPanel.TabIndex = 1;
             // 
-            // contextTextBox
-            // 
-            this.contextTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.contextTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.contextTextBox.Location = new System.Drawing.Point(3, 408);
-            this.contextTextBox.Name = "contextTextBox";
-            this.contextTextBox.ReadOnly = true;
-            this.contextTextBox.Size = new System.Drawing.Size(853, 13);
-            this.contextTextBox.TabIndex = 2;
-            this.contextTextBox.Click += new System.EventHandler(this.ContextTextBox_Click);
-            // 
             // JsonControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.contextTextBox);
             this.Controls.Add(this.PanelSearch);
             this.Controls.Add(this.scintillaPanel);
             this.Name = "JsonControl";
@@ -148,7 +134,6 @@
             this.PanelSearch.ResumeLayout(false);
             this.PanelSearch.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -161,6 +146,5 @@
         private System.Windows.Forms.Button SearchButtonPrevious;
         private System.Windows.Forms.Timer linterTimer;
         private System.Windows.Forms.Panel scintillaPanel;
-        private System.Windows.Forms.TextBox contextTextBox;
     }
 }

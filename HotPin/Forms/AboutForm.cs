@@ -7,8 +7,9 @@ namespace HotPin
         public AboutForm()
         {
             InitializeComponent();
-            textBox.SelectionStart = 0;
             pictureBox.BackgroundImage = Application.Resources.HotPin;
+            textBox.Text = $"HotPin\r\nversion {Application.Version}";
+            textBox.SelectionStart = 0;
         }
     }
 }

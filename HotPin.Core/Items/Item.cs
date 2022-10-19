@@ -5,6 +5,7 @@ namespace HotPin
 {
     public abstract class Item
     {
+        [Parameter(Description = "object identifier")]
         public string Name { get; set; }
 
         static readonly Image ItemImage = Core.Resources.Default;

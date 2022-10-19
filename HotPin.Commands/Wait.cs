@@ -9,6 +9,7 @@ namespace HotPin.Commands
         static readonly Image WaitImage = Resources.Wait;
         public override Image Image => WaitImage;
 
+        [Parameter(Description = "wait item in seconde(s)")]
         public float TimeInSecond { get; set; } = 1.0f;
 
         protected override async Task OnExecute()

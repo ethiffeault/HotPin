@@ -17,6 +17,7 @@ namespace HotPin
         public static Application Instance { get; } = new Application();
         public static ApplicationSettings Settings { get => HotPin.Settings.Get<ApplicationSettings>(); }
         public const string Name = "HotPin";
+        public static string Version { get; } = "0.0.2";
 
         public HotKeyForm Form { get; private set; }
         public Project Project { get; private set; }

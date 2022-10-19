@@ -52,7 +52,7 @@
             this.textBox.ReadOnly = true;
             this.textBox.Size = new System.Drawing.Size(233, 116);
             this.textBox.TabIndex = 1;
-            this.textBox.Text = "HotPin\r\nversion 1.0.0";
+            this.textBox.Text = "HotPin\r\nversion x.y.z";
             // 
             // buttonOk
             // 

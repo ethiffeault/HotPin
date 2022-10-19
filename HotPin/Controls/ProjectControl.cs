@@ -131,10 +131,15 @@ namespace HotPin
             if (selectedNode == null)
             {
                 SetJsonControlText("", true);
+                textBoxDocumentation.Text = "";
             }
             else
             {
                 SetJsonControlText(GetNodeJson(selectedNode), false);
+                if (selectedNode.Tag is Item item)
+                    textBoxDocumentation.Text = Parameter.GetDocumentation(item.GetType());
+                else
+                    textBoxDocumentation.Text = "";
             }
 
             SetSelectedNodeDirty(false);

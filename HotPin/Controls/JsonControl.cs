@@ -33,7 +33,7 @@ namespace HotPin.Controls
         private List<Error> errors = new List<Error>();
         private int errorIndicator = 8;
 
-        private string fileName = null;
+        //private string fileName = null;
         private Error contextError = null;
 
         public Action ContentChanged;
@@ -102,15 +102,15 @@ namespace HotPin.Controls
 
             if (contextError != null)
             {
-                contextTextBox.Text = contextError.Message;
-                contextTextBox.BackColor = IntToColor(0xa31515);
-                contextTextBox.ForeColor = Color.White;
+                //contextTextBox.Text = contextError.Message;
+                //contextTextBox.BackColor = IntToColor(0xa31515);
+                //contextTextBox.ForeColor = Color.White;
             }
             else
             {
-                contextTextBox.Text = fileName != null ? fileName : "";
-                contextTextBox.BackColor = SystemColors.Control;
-                contextTextBox.ForeColor = SystemColors.WindowText;
+                //contextTextBox.Text = fileName != null ? fileName : "";
+                //contextTextBox.BackColor = SystemColors.Control;
+                //contextTextBox.ForeColor = SystemColors.WindowText;
             }
         }
 
@@ -250,7 +250,7 @@ namespace HotPin.Controls
             if (!BottomContextText)
             {
                 scintilla.Dock = DockStyle.Fill;
-                contextTextBox.Visible = false;
+                //contextTextBox.Visible = false;
             }
         }
 

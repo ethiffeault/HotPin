@@ -12,8 +12,7 @@ namespace HotPin
         Alt = 1,
         Control = 2,
         Shift = 4,
-        Windows = 8,
-        NoRepeat = 0x4000
+        Windows = 8
     }
 
     public struct HotKey : IComparable<HotKey>
@@ -60,13 +59,15 @@ namespace HotPin
 
         private Dictionary<HotKey, int> Registered = new Dictionary<HotKey, int>();
 
+        private const uint NoRepeat = 0x4000;
+
         public void RegisterHotKey(HotKey hotKey)
         {
             if (Registered.ContainsKey(hotKey))
                 return;
             int id = Interlocked.Increment(ref Id);
             Registered.Add(hotKey, id);
-            RegisterHotKeyInternal(Handle, id, (uint)hotKey.Modifiers, (uint)hotKey.Key);
+            RegisterHotKeyInternal(Handle, id, (uint)hotKey.Modifiers | NoRepeat, (uint)hotKey.Key);
         }
 
         public void UnregisterHotKey(HotKey hotKey)

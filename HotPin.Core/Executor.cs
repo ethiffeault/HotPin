@@ -59,11 +59,9 @@ namespace HotPin
 
                 HotKeyModifiers flags = playlist.Modifiers[0];
                 for (int i = 1; i < playlist.Modifiers.Count; ++i)
-                    flags &= playlist.Modifiers[i];
-                //flags &= HotKeyModifiers.NoRepeat;
+                    flags |= playlist.Modifiers[i];
 
                 HotKey hotKey = new HotKey(playlist.Key, flags);
-
                 if (hotKeyPlaylist.ContainsKey(hotKey))
                     continue;
 

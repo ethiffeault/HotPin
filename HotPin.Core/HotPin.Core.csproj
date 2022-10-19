@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>CS0649;CS1998</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,6 +48,7 @@
     <Compile Include="Application.cs" />
     <Compile Include="Items\Command.cs" />
     <Compile Include="Executor.cs" />
+    <Compile Include="Items\Parameter.cs" />
     <Compile Include="Items\Folder.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>

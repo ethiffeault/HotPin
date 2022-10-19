@@ -75,7 +75,7 @@
             this.menuItemRunning});
             this.menuStripMainMenu.Location = new System.Drawing.Point(0, 0);
             this.menuStripMainMenu.Name = "menuStripMainMenu";
-            this.menuStripMainMenu.Size = new System.Drawing.Size(800, 24);
+            this.menuStripMainMenu.Size = new System.Drawing.Size(1049, 24);
             this.menuStripMainMenu.TabIndex = 1;
             this.menuStripMainMenu.Text = "menuStrip1";
             // 
@@ -236,14 +236,14 @@
             this.projectControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.projectControl.Location = new System.Drawing.Point(0, 24);
             this.projectControl.Name = "projectControl";
-            this.projectControl.Size = new System.Drawing.Size(800, 426);
+            this.projectControl.Size = new System.Drawing.Size(1049, 437);
             this.projectControl.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1049, 461);
             this.Controls.Add(this.projectControl);
             this.Controls.Add(this.menuStripMainMenu);
             this.MainMenuStrip = this.menuStripMainMenu;
