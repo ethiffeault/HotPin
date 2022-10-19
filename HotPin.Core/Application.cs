@@ -18,17 +18,17 @@ namespace HotPin
 
         public HotKeyForm Form { get; private set; }
         public Project Project { get; private set; }
+        public Executor Executor { get; private set; }
+        public bool DebugMode { get; } = System.Diagnostics.Debugger.IsAttached;
 
         public Action ProjectSaving;
         public Action ProjectSaved;
         public Action ProjectLoaded;
         public Action ProjectClosed;
-
         public Action ForceClose;
 
         private NotifyIcon trayIcon;
-        public Executor Executor { get; private set; }
-        public bool closing = false;
+        private bool closing = false;
 
         // expose resources
         public static class Resources
@@ -60,10 +60,7 @@ namespace HotPin
             Executor = new Executor(form);
 
             Form.Show();
-            if (!System.Diagnostics.Debugger.IsAttached && !Settings.ShowWelcomeScreen)
-                Form.Visible = false;
-
-            if (!Settings.ShowWelcomeScreen)
+            if (DebugMode == false && Settings.ShowWelcomeScreen == false)
                 Form.Visible = false;
 
             // Initialize Tray Icon
@@ -92,8 +89,8 @@ Next time you will start HotPin, it will be minimized in the task bar tray.
 To always have tray icon visible:
     1. Right-click on the Taskbar
     2. Taskbar Settings
-    3. Task corner icons
-    4. Enable HotPin";
+    3. Taskbar corner overflow
+    4. Turn HotPin to On";
                 MessageBoxEx.Show(Form, message, "HotPin!");
             }
         }

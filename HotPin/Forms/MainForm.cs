@@ -64,7 +64,7 @@ namespace HotPin
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Application.Instance.DebugMode)
             {
                 debugClose = true;
                 Application.Instance.Exit();
