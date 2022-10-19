@@ -39,7 +39,9 @@ namespace HotPin.Commands
             process.StartInfo.CreateNoWindow = true;
             process.Start();
             if (WaitForExit)
-                process.WaitForExit();
+            {
+                await Task.Run(() => { process.WaitForExit(); });
+            }
         }
     }
 }

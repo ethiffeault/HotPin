@@ -125,6 +125,11 @@ Have Fun!";
         private void HideShowMainForm(object sender = null, EventArgs e = null)
         {
             Form.Visible = !Form.Visible;
+            if (Form.Visible)
+            {
+                Form.Activate();
+                Form.Focus();
+            }
         }
 
         public void Exit(object sender = null, EventArgs e = null)
