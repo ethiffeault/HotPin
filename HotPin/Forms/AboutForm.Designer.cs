@@ -36,7 +36,6 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.BackgroundImage = global::HotPin.Properties.Resources.HotPin1;
             this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox.Location = new System.Drawing.Point(12, 12);
             this.pictureBox.Name = "pictureBox";

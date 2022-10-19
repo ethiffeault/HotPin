@@ -8,6 +8,7 @@ namespace HotPin
         {
             InitializeComponent();
             textBox.SelectionStart = 0;
+            pictureBox.BackgroundImage = Application.Resources.HotPin;
         }
     }
 }

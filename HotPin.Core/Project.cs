@@ -21,18 +21,6 @@ namespace HotPin
             if (project == null)
             {
                 project = new Project();
-                project.Items.Add(new Commands.DialogBox());
-                Folder fx3 = new Folder() { Name = "FX3" };
-
-                fx3.Children.Add(new Commands.DialogBox());
-                fx3.Children.Add(new Commands.DialogBox());
-                fx3.Children.Add(new Folder() { Name = "Dmd" });
-
-                Playlist playlist = new Playlist() { Name = "PlayList" };
-                fx3.Children.Add(playlist);
-                playlist.Commands.Add(new Commands.DialogBox());
-
-                project.Items.Add(fx3);
             }
 
             return project;

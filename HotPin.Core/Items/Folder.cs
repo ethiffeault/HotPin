@@ -5,7 +5,7 @@ namespace HotPin
 {
     public class Folder : Item
     {
-        static readonly Image FolderImage = Properties.Resources.Folder;
+        static readonly Image FolderImage = Core.Resources.Folder;
 
         public override Image Image { get => FolderImage; }
 

@@ -1,5 +1,4 @@
-﻿using HotPin.Properties;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace HotPin
 {
@@ -17,13 +16,32 @@ namespace HotPin
 
             Text = Title;
 
-            Icon = Resources.HotPin;
+            Icon = Application.Resources.HotPinIcon;
 
             Application.Instance.ProjectLoaded += ProjectLoaded;
             Application.Instance.ProjectSaving += ProjectSaving;
             Application.Instance.ProjectSaved += ProjectSaved;
+            Application.Instance.ForceClose += ForceClose;
 
             projectControl.OnProjectChanged += ProjectChanged;
+
+            // images
+            menuItemFileSave.Image = Application.Resources.Save;
+            menuItemFileLoad.Image = Application.Resources.Load;
+            menuItemFileExit.Image = Application.Resources.Exit;
+
+            menuItemToolsConfiguration.Image = Application.Resources.Configuration;
+            menuItemToolsConfigurationOpen.Image = Application.Resources.Open;
+            menuItemToolsConfigurationReload.Image = Application.Resources.Reload;
+
+            menuItemDebugLog.Image = Application.Resources.Log;
+            menuItemDebugLogLevel.Image = Application.Resources.Level;
+            menuItemDebugLogOpen.Image = Application.Resources.Open;
+            menuItemDebugLogLevelInfo.Image = Application.Resources.Info;
+            menuItemDebugLogLevelWarning.Image = Application.Resources.Warning;
+            menuItemDebugLogLevelError.Image = Application.Resources.Error;
+
+            menuItemHelpAbout.Image = Application.Resources.HotPin;
         }
 
         private void ProjectLoaded()
@@ -96,8 +114,8 @@ namespace HotPin
         private void MenuItemDebugLogLevelDropDownOpened(object sender, System.EventArgs e)
         {
             menuItemDebugLogLevelInfo.Checked = Log.Setting.LogLevel == LogLevel.Info;
-            menuItemDebugLogLevelInfoWarning.Checked = Log.Setting.LogLevel == LogLevel.Warning;
-            menuItemDebugLogLevelInfoError.Checked = Log.Setting.LogLevel == LogLevel.Error;
+            menuItemDebugLogLevelWarning.Checked = Log.Setting.LogLevel == LogLevel.Warning;
+            menuItemDebugLogLevelError.Checked = Log.Setting.LogLevel == LogLevel.Error;
         }
 
         private void MenuItemDebugLogLevelInfoClick(object sender, System.EventArgs e)
@@ -120,12 +138,12 @@ namespace HotPin
 
         private void MenuItemDebugLogOpenClick(object sender, System.EventArgs e)
         {
-            Log.Open();
+            Log.View();
         }
 
         private void MenuItemToolsConfigurationOpenClick(object sender, System.EventArgs e)
         {
-            Settings.Open();
+            Settings.Edit();
         }
 
         private void MenuItemToolsConfigurationReloadClick(object sender, System.EventArgs e)

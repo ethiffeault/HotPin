@@ -83,11 +83,10 @@ namespace HotPin
             }
         }
 
-        public static void Open()
+        public static void Edit()
         {
             if (File.Exists(SettingsFile))
                 System.Diagnostics.Process.Start(SettingsFile);
         }
-
     }
 }

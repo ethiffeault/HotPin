@@ -42,13 +42,13 @@
             this.menuItemToolsConfigurationReload = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDebug = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDebugLog = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDebugOpenLog = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDebugLogOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDebugLogLevel = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDebugLogLevelInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDebugLogLevelInfoWarning = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDebugLogLevelInfoError = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDebugLogLevelWarning = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDebugLogLevelError = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -159,7 +159,7 @@
             // menuItemDebugLog
             // 
             this.menuItemDebugLog.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemDebugOpenLog,
+            this.menuItemDebugLogOpen,
             this.separator2,
             this.menuItemDebugLogLevel});
             this.menuItemDebugLog.Name = "menuItemDebugLog";
@@ -169,17 +169,17 @@
             // 
             // menuItemDebugOpenLog
             // 
-            this.menuItemDebugOpenLog.Name = "menuItemDebugOpenLog";
-            this.menuItemDebugOpenLog.Size = new System.Drawing.Size(103, 22);
-            this.menuItemDebugOpenLog.Text = "Open";
-            this.menuItemDebugOpenLog.Click += new System.EventHandler(this.MenuItemDebugLogOpenClick);
+            this.menuItemDebugLogOpen.Name = "menuItemDebugOpenLog";
+            this.menuItemDebugLogOpen.Size = new System.Drawing.Size(103, 22);
+            this.menuItemDebugLogOpen.Text = "Open";
+            this.menuItemDebugLogOpen.Click += new System.EventHandler(this.MenuItemDebugLogOpenClick);
             // 
             // menuItemDebugLogLevel
             // 
             this.menuItemDebugLogLevel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemDebugLogLevelInfo,
-            this.menuItemDebugLogLevelInfoWarning,
-            this.menuItemDebugLogLevelInfoError});
+            this.menuItemDebugLogLevelWarning,
+            this.menuItemDebugLogLevelError});
             this.menuItemDebugLogLevel.Name = "menuItemDebugLogLevel";
             this.menuItemDebugLogLevel.Size = new System.Drawing.Size(103, 22);
             this.menuItemDebugLogLevel.Text = "Level";
@@ -194,32 +194,32 @@
             // 
             // menuItemDebugLogLevelInfoWarning
             // 
-            this.menuItemDebugLogLevelInfoWarning.Name = "menuItemDebugLogLevelInfoWarning";
-            this.menuItemDebugLogLevelInfoWarning.Size = new System.Drawing.Size(119, 22);
-            this.menuItemDebugLogLevelInfoWarning.Text = "Warning";
-            this.menuItemDebugLogLevelInfoWarning.Click += new System.EventHandler(this.MenuItemDebugLogLevelWarningClick);
+            this.menuItemDebugLogLevelWarning.Name = "menuItemDebugLogLevelInfoWarning";
+            this.menuItemDebugLogLevelWarning.Size = new System.Drawing.Size(119, 22);
+            this.menuItemDebugLogLevelWarning.Text = "Warning";
+            this.menuItemDebugLogLevelWarning.Click += new System.EventHandler(this.MenuItemDebugLogLevelWarningClick);
             // 
             // menuItemDebugLogLevelInfoError
             // 
-            this.menuItemDebugLogLevelInfoError.Name = "menuItemDebugLogLevelInfoError";
-            this.menuItemDebugLogLevelInfoError.Size = new System.Drawing.Size(119, 22);
-            this.menuItemDebugLogLevelInfoError.Text = "Error";
-            this.menuItemDebugLogLevelInfoError.Click += new System.EventHandler(this.MenuItemDebugLogLevelErrorClick);
+            this.menuItemDebugLogLevelError.Name = "menuItemDebugLogLevelInfoError";
+            this.menuItemDebugLogLevelError.Size = new System.Drawing.Size(119, 22);
+            this.menuItemDebugLogLevelError.Text = "Error";
+            this.menuItemDebugLogLevelError.Click += new System.EventHandler(this.MenuItemDebugLogLevelErrorClick);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
+            this.menuItemHelpAbout});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aboutToolStripMenuItem.Text = "About...";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.MenuItemHelpAboutClick);
+            this.menuItemHelpAbout.Name = "aboutToolStripMenuItem";
+            this.menuItemHelpAbout.Size = new System.Drawing.Size(180, 22);
+            this.menuItemHelpAbout.Text = "About...";
+            this.menuItemHelpAbout.Click += new System.EventHandler(this.MenuItemHelpAboutClick);
             // 
             // MainForm
             // 
@@ -250,11 +250,11 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemFileLoad;
         private System.Windows.Forms.ToolStripMenuItem menuItemDebug;
         private System.Windows.Forms.ToolStripMenuItem menuItemDebugLog;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDebugOpenLog;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDebugLogOpen;
         private System.Windows.Forms.ToolStripMenuItem menuItemDebugLogLevel;
         private System.Windows.Forms.ToolStripMenuItem menuItemDebugLogLevelInfo;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDebugLogLevelInfoWarning;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDebugLogLevelInfoError;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDebugLogLevelWarning;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDebugLogLevelError;
         private System.Windows.Forms.ToolStripSeparator separator1;
         private System.Windows.Forms.ToolStripSeparator separator2;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
@@ -262,7 +262,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemToolsConfiguration;
         private System.Windows.Forms.ToolStripMenuItem menuItemToolsConfigurationOpen;
         private System.Windows.Forms.ToolStripMenuItem menuItemToolsConfigurationReload;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuItemHelpAbout;
     }
 }
 

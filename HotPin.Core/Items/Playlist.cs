@@ -8,7 +8,7 @@ namespace HotPin
 {
     public class Playlist : Runable
     {
-        static readonly Image PlaylistImage = Properties.Resources.Playlist;
+        static readonly Image PlaylistImage = Core.Resources.Playlist;
 
         public override Image Image { get => PlaylistImage; }
 

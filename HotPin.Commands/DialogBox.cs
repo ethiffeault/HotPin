@@ -5,7 +5,7 @@ namespace HotPin.Commands
 {
     public class DialogBox : Command
     {
-        static readonly Image DialogBoxImage = Properties.Resources.DialogBox;
+        static readonly Image DialogBoxImage = Resources.DialogBox;
 
         public string Title { get; set; } = "HotPin";
         public string Message { get; set; } = "Welcome to HotPin!";

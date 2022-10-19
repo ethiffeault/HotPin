@@ -67,7 +67,7 @@ namespace HotPin
             }
         }
 
-        public static void Open()
+        public static void View()
         {
             if (File.Exists(Log.LogFile))
                 System.Diagnostics.Process.Start(Log.LogFile);

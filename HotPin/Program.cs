@@ -4,17 +4,14 @@ namespace HotPin
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-            System.Windows.Forms.Application.Run(new Application());
 
-            //Application.Run(new MainForm());
+            Application.Instance.Init(new MainForm());
+            System.Windows.Forms.Application.Run(Application.Instance);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace HotPin
     {
         public string Name { get; set; }
 
-        static readonly Image ItemImage = Properties.Resources.Default;
+        static readonly Image ItemImage = Core.Resources.Default;
 
         [Json.NonSerialize]
         public virtual Image Image { get => ItemImage; }
