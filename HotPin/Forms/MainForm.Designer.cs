@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.separator1 = new System.Windows.Forms.ToolStripSeparator();
             this.separator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.projectControl = new HotPin.ProjectControl();
             this.menuStripMainMenu = new System.Windows.Forms.MenuStrip();
             this.menuItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemFileSave = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +49,9 @@
             this.menuItemDebugLogLevelError = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemRunning = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.projectControl = new HotPin.ProjectControl();
             this.menuStripMainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,21 +65,14 @@
             this.separator2.Name = "separator2";
             this.separator2.Size = new System.Drawing.Size(100, 6);
             // 
-            // projectControl
-            // 
-            this.projectControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.projectControl.Location = new System.Drawing.Point(0, 24);
-            this.projectControl.Name = "projectControl";
-            this.projectControl.Size = new System.Drawing.Size(800, 426);
-            this.projectControl.TabIndex = 0;
-            // 
             // menuStripMainMenu
             // 
             this.menuStripMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemFile,
             this.toolsToolStripMenuItem,
             this.menuItemDebug,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.menuItemRunning});
             this.menuStripMainMenu.Location = new System.Drawing.Point(0, 0);
             this.menuStripMainMenu.Name = "menuStripMainMenu";
             this.menuStripMainMenu.Size = new System.Drawing.Size(800, 24);
@@ -167,9 +163,9 @@
             this.menuItemDebugLog.Text = "Log";
             this.menuItemDebugLog.DropDownOpened += new System.EventHandler(this.MenuItemDebugLogLevelDropDownOpened);
             // 
-            // menuItemDebugOpenLog
+            // menuItemDebugLogOpen
             // 
-            this.menuItemDebugLogOpen.Name = "menuItemDebugOpenLog";
+            this.menuItemDebugLogOpen.Name = "menuItemDebugLogOpen";
             this.menuItemDebugLogOpen.Size = new System.Drawing.Size(103, 22);
             this.menuItemDebugLogOpen.Text = "Open";
             this.menuItemDebugLogOpen.Click += new System.EventHandler(this.MenuItemDebugLogOpenClick);
@@ -192,16 +188,16 @@
             this.menuItemDebugLogLevelInfo.Text = "Info";
             this.menuItemDebugLogLevelInfo.Click += new System.EventHandler(this.MenuItemDebugLogLevelInfoClick);
             // 
-            // menuItemDebugLogLevelInfoWarning
+            // menuItemDebugLogLevelWarning
             // 
-            this.menuItemDebugLogLevelWarning.Name = "menuItemDebugLogLevelInfoWarning";
+            this.menuItemDebugLogLevelWarning.Name = "menuItemDebugLogLevelWarning";
             this.menuItemDebugLogLevelWarning.Size = new System.Drawing.Size(119, 22);
             this.menuItemDebugLogLevelWarning.Text = "Warning";
             this.menuItemDebugLogLevelWarning.Click += new System.EventHandler(this.MenuItemDebugLogLevelWarningClick);
             // 
-            // menuItemDebugLogLevelInfoError
+            // menuItemDebugLogLevelError
             // 
-            this.menuItemDebugLogLevelError.Name = "menuItemDebugLogLevelInfoError";
+            this.menuItemDebugLogLevelError.Name = "menuItemDebugLogLevelError";
             this.menuItemDebugLogLevelError.Size = new System.Drawing.Size(119, 22);
             this.menuItemDebugLogLevelError.Text = "Error";
             this.menuItemDebugLogLevelError.Click += new System.EventHandler(this.MenuItemDebugLogLevelErrorClick);
@@ -214,12 +210,34 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // aboutToolStripMenuItem
+            // menuItemHelpAbout
             // 
-            this.menuItemHelpAbout.Name = "aboutToolStripMenuItem";
-            this.menuItemHelpAbout.Size = new System.Drawing.Size(180, 22);
+            this.menuItemHelpAbout.Name = "menuItemHelpAbout";
+            this.menuItemHelpAbout.Size = new System.Drawing.Size(116, 22);
             this.menuItemHelpAbout.Text = "About...";
             this.menuItemHelpAbout.Click += new System.EventHandler(this.MenuItemHelpAboutClick);
+            // 
+            // menuItemRunning
+            // 
+            this.menuItemRunning.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.menuItemRunning.AutoToolTip = true;
+            this.menuItemRunning.Name = "menuItemRunning";
+            this.menuItemRunning.Size = new System.Drawing.Size(64, 20);
+            this.menuItemRunning.Text = "Running";
+            this.menuItemRunning.ToolTipText = "Running State";
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // projectControl
+            // 
+            this.projectControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.projectControl.Location = new System.Drawing.Point(0, 24);
+            this.projectControl.Name = "projectControl";
+            this.projectControl.Size = new System.Drawing.Size(800, 426);
+            this.projectControl.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -263,6 +281,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemToolsConfigurationOpen;
         private System.Windows.Forms.ToolStripMenuItem menuItemToolsConfigurationReload;
         private System.Windows.Forms.ToolStripMenuItem menuItemHelpAbout;
+        private System.Windows.Forms.ToolStripMenuItem menuItemRunning;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

@@ -16,6 +16,7 @@ namespace HotPin
     {
         public static Application Instance { get; } = new Application();
         public static ApplicationSettings Settings { get => HotPin.Settings.Get<ApplicationSettings>(); }
+        public const string Name = "HotPin";
 
         public HotKeyForm Form { get; private set; }
         public Project Project { get; private set; }
@@ -29,16 +30,15 @@ namespace HotPin
         public Action ProjectClosed;
         public Action ForceClose;
 
-
         private NotifyIcon trayIcon;
         private bool closing = false;
-
 
         // expose resources
         public static class Resources
         {
             public static readonly Icon HotPinIcon = Core.Resources.HotPinIcon;
             public static readonly Image HotPin = Core.Resources.HotPin;
+            public static readonly Image HotPinGrey = Core.Resources.HotPinGrey;
             public static readonly Image Save = Core.Resources.Save;
             public static readonly Image Load = Core.Resources.Load;
             public static readonly Image Exit = Core.Resources.Exit;
@@ -61,7 +61,8 @@ namespace HotPin
 
         public void Init(HotKeyForm form)
         {
-            Log.Info("Starting HotPin!", "HotPin");
+            Log.DefaultContext = Application.Name;
+            Log.Info("Starting HotPin!");
 
             Form = form;
             Executor = new Executor(form);
@@ -92,12 +93,15 @@ namespace HotPin
                 HotPin.Settings.Save();
                 string message =
 @"Welcome to HotPin!
+
 Next time you will start HotPin, it will be minimized in the task bar tray.
 To always have tray icon visible:
     1. Right-click on the Taskbar
     2. Taskbar Settings
     3. Taskbar corner overflow
-    4. Turn HotPin to On";
+    4. Turn HotPin On
+
+Have Fun!";
                 MessageBoxEx.Show(Form, message, "HotPin!");
             }
         }
@@ -134,7 +138,7 @@ To always have tray icon visible:
 
                 // Hide tray icon, otherwise it will remain shown until user mouses over it
                 trayIcon.Visible = false;
-                Log.Info("Closing HotPin", "HotPin");
+                Log.Info("Closing HotPin");
                 HotPin.Settings.Save();
                 System.Windows.Forms.Application.Exit();
             }

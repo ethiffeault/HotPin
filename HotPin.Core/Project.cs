@@ -5,7 +5,7 @@ namespace HotPin
 {
     public class Project
     {
-        public static string ProjectFile = Path.Combine(new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName, "HotPin.json");
+        public static string ProjectFile = Path.Combine(new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName, "HotPin.project.json");
 
         public List<Item> Items { get; set; } = new List<Item>();
 
@@ -57,6 +57,4 @@ namespace HotPin
             }
         }
     }
-
-
 }

@@ -7,11 +7,11 @@ namespace HotPin.Commands
     {
         static readonly Image DialogBoxImage = Resources.DialogBox;
 
-        public string Title { get; set; } = "HotPin";
-        public string Message { get; set; } = "Welcome to HotPin!";
+        public string Title { get; set; } = Application.Name;
+        public string Message { get; set; } = $"Welcome to {Application.Name}!";
         public override Image Image => DialogBoxImage;
 
-        public override async Task Run()
+        protected override async Task OnExecute()
         {
             MessageBoxEx.Show(Message, Title);
         }

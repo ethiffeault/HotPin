@@ -544,5 +544,26 @@ namespace HotPin
             }
         }
 
+        private void ContextMenuFolderOpening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            contextMenuFolderAddPlaylist.Visible = selectedNode != null;
+            contextMenuFolderDelete.Visible = selectedNode != null;
+        }
+
+        private void ContextMenuCommandRunClick(object sender, EventArgs e)
+        {
+            if (selectedNode != null && selectedNode.Tag is Command command)
+            {
+                Application.Instance.Executor.RunCommand(command);
+            }
+        }
+
+        private void contextMenuPlaylistRun_Click(object sender, EventArgs e)
+        {
+            if (selectedNode != null && selectedNode.Tag is Playlist playlist)
+            {
+                Application.Instance.Executor.RunPlaylist(playlist);
+            }
+        }
     }
 }

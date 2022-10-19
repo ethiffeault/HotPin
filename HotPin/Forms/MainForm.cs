@@ -4,7 +4,7 @@ namespace HotPin
 {
     public partial class MainForm : HotKeyForm
     {
-        public const string Title = "HotPin";
+        public const string Title = Application.Name;
 
         private bool forceClose = false;
         private bool debugClose = false;
@@ -42,6 +42,9 @@ namespace HotPin
             menuItemDebugLogLevelError.Image = Application.Resources.Error;
 
             menuItemHelpAbout.Image = Application.Resources.HotPin;
+
+            menuItemRunning.Text = "";
+            menuItemRunning.Image = Application.Resources.HotPinGrey;
         }
 
         private void ProjectLoaded()
@@ -155,6 +158,18 @@ namespace HotPin
         {
             AboutForm aboutForm = new AboutForm();
             aboutForm.ShowDialog(this);
+        }
+
+        private void timer_Tick(object sender, System.EventArgs e)
+        {
+            if (Application.Instance.Executor.IsRunnig)
+            {
+                menuItemRunning.Image = Application.Resources.HotPin;
+            }
+            else
+            {
+                menuItemRunning.Image = Application.Resources.HotPinGrey;
+            }
         }
     }
 }

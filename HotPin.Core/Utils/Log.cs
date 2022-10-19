@@ -21,6 +21,8 @@ namespace HotPin
 
         public static readonly string LogFile = Path.Combine(new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName, "HotPin.log");
 
+        public static string DefaultContext { get; set; } = "Log";
+
         static Log()
         {
             if (File.Exists(LogFile))
@@ -50,6 +52,8 @@ namespace HotPin
 
         public static void Write(LogLevel level, string msg, string context)
         {
+            context = context ?? DefaultContext;
+
             if (level <= Setting.LogLevel)
             {
                 DateTime time = DateTime.Now;
@@ -58,6 +62,9 @@ namespace HotPin
                     output = string.Format("{0:00}:{1:00}:{2:00} {3,-7} {4}{5}", time.Hour, time.Minute, time.Second, level, msg, System.Environment.NewLine);
                 else
                     output = string.Format("{0:00}:{1:00}:{2:00} {3,-7} [{4, -12}] {5}{6}", time.Hour, time.Minute, time.Second, level, context, msg, System.Environment.NewLine);
+
+                if (System.Diagnostics.Debugger.IsAttached)
+                    System.Diagnostics.Debug.Write(output);
 
                 try
                 {

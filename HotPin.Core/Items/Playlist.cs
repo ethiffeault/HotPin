@@ -16,6 +16,8 @@ namespace HotPin
 
         public List<HotKeyModifiers> Modifiers { get; set; } = new List<HotKeyModifiers>() { HotKeyModifiers.Control };
 
+        public bool Exclusive { get; set; } = true;
+
         public List<Command> Commands { get; set; } = new List<Command>();
 
         public override List<Item> GetChildren()
@@ -23,11 +25,11 @@ namespace HotPin
             return Commands.Cast<Item>().ToList();
         }
 
-        public override async Task Run()
+        protected override async Task OnExecute()
         {
             foreach (Command command in Commands)
             {
-                await command.Run();
+                await command.Execute();
             }
         }
     }

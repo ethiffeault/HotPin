@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HotPin
 {
@@ -6,6 +7,9 @@ namespace HotPin
     {
         private Dictionary<HotKey, Playlist> hotKeyPlaylist = new Dictionary<HotKey, Playlist>();
         private HotKeyForm hotKeyForm;
+        private HashSet<Playlist> exclusiveRunningPlaylists = new HashSet<Playlist>();
+        private int runningCount = 0;
+        public bool IsRunnig { get => runningCount != 0; }
 
         public Executor(HotKeyForm hotKeyForm)
         {
@@ -70,12 +74,41 @@ namespace HotPin
 
         public void RunPlaylist(Playlist playlist)
         {
-            _ = playlist.Run();
+            _ = RunPlaylistAsync(playlist);
+        }
+
+        public async Task RunPlaylistAsync(Playlist playlist)
+        {
+            if (playlist.Exclusive)
+            {
+                if (exclusiveRunningPlaylists.Contains(playlist))
+                    return;
+                exclusiveRunningPlaylists.Add(playlist);
+                ++runningCount;
+                await playlist.Execute();
+                --runningCount;
+                exclusiveRunningPlaylists.Remove(playlist);
+            }
+            else
+            {
+                ++runningCount;
+                await playlist.Execute();
+                --runningCount;
+            }
         }
 
         public void RunCommand(Command command)
         {
-            _ = command.Run();
+            ++runningCount;
+            _ = command.Execute();
+            --runningCount;
+        }
+
+        public async Task RunCommandAsync(Command command)
+        {
+            ++runningCount;
+            await command.Execute();
+            --runningCount;
         }
     }
 }

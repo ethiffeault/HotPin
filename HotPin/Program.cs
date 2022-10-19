@@ -24,7 +24,7 @@ namespace HotPin
                 }
                 else if (System.Diagnostics.Debugger.IsAttached)
                 {
-                    MessageBoxEx.Show("Already running... exiting...", "HotPin");
+                    MessageBoxEx.Show("Already running... exiting...", Application.Name);
                 }
             }
         }
