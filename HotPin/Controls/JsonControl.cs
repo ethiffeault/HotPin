@@ -292,7 +292,9 @@ namespace HotPin.Controls
             scintilla.Styles[Style.Json.Keyword].ForeColor = IntToColor(0x0000ff);
             scintilla.Styles[Style.Json.LdKeyword].ForeColor = IntToColor(0x0000ff);
             scintilla.Styles[Style.Json.Error].ForeColor = IntToColor(0x800000);
+#pragma warning disable 0618
             scintilla.Lexer = Lexer.Json;
+#pragma warning restore 0618
 
             scintilla.SetKeywords(0, "true false");
             scintilla.SetKeywords(1, "true false");

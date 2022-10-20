@@ -10,9 +10,7 @@ namespace HotPin
         [STAThread]
         static void Main()
         {
-            Assembly assembly = typeof(Program).Assembly;
-            GuidAttribute guidAttribute = assembly.GetCustomAttributes(typeof(GuidAttribute), true)[0] as GuidAttribute;
-            using (Mutex mutex = new Mutex(false, "Global\\" + guidAttribute.Value))
+            using (Mutex mutex = new Mutex(false, "Global\\99D17104-9ECD-4124-A5FF-1A7EA320467B"))
             {
                 if (mutex.WaitOne(0, false))
                 {
