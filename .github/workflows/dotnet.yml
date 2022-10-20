@@ -22,13 +22,13 @@ jobs:
         dotnet-version: 6.0.x
     - name: Build
       run: dotnet build -c Release HotPin.netcore.sln
-    - name: Publish:
+    - name: Publish
       run: dotnet publish --output "output" --configuration Release --self-contained false HotPin.netcore.sln
     - name: Generate Artifact Name
       id: generate-name
       run: |
         echo "::set-output name=artifact::${{ github.event.repository.name }}.${{ github.ref_name }}.${{ github.run_id }}.zip"
-    - name: Create Artifact
+    - name: Generate Artifact
       uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.generate-name.outputs.artifact }}
