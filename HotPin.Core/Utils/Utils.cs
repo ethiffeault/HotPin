@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -31,6 +32,16 @@ namespace HotPin
                 }
             }
             return result;
+        }
+
+        public static void StartProcess(string file)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo
+            {
+                FileName = file,
+                UseShellExecute = true
+            };
+            Process.Start(psi);
         }
     }
 }

@@ -86,7 +86,7 @@ namespace HotPin
         public static void Edit()
         {
             if (File.Exists(SettingsFile))
-                System.Diagnostics.Process.Start(SettingsFile);
+                Utils.StartProcess(SettingsFile);
         }
     }
 }
