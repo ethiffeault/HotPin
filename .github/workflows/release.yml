@@ -36,7 +36,7 @@ jobs:
       id: generate-artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ steps.generate-name.outputs.artifact }}
+        name: ${{ steps.generate-artifac-name.outputs.artifact }}
         path: ./output
     - name: Create Release
       id: create-release
