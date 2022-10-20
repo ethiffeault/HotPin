@@ -28,6 +28,8 @@ jobs:
       id: generate-name
       run: |
         echo "::set-output name=artifact::${{ github.event.repository.name }}.${{ github.ref_name }}.${{ github.run_id }}.zip"
+    - name: Copy HotPin.exe
+      run: cp HotPin.exe ./output/HotPin.exe
     - name: Generate Artifact
       uses: actions/upload-artifact@v3
       with:

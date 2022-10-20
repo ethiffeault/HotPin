@@ -1,0 +1,1 @@
+dotnet publish --output "output" --configuration Release --self-contained false --runtime win-x64 HotPin.netcore.sln
