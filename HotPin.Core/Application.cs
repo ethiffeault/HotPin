@@ -195,10 +195,7 @@ Have Fun!";
         private static string ReadVersion()
         {
             Assembly assembly = typeof(Application).Assembly;
-            //string resourceName = "HotPin.Core.version.txt";
-
             string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("version.txt"));
-
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))
             {

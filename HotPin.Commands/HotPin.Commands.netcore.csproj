@@ -7,6 +7,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <RootNamespace>HotPin.Commands</RootNamespace>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <AssemblyName>HotPin.Commands</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

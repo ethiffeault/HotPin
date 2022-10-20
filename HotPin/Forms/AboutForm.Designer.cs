@@ -74,7 +74,7 @@
             this.buttonLicence.TabIndex = 3;
             this.buttonLicence.Text = "Licence";
             this.buttonLicence.UseVisualStyleBackColor = true;
-            this.buttonLicence.Click += new System.EventHandler(this.buttonLicence_Click);
+            this.buttonLicence.Click += new System.EventHandler(this.ButtonLicenceClick);
             // 
             // AboutForm
             // 

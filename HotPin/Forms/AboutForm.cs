@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace HotPin
@@ -10,11 +11,11 @@ namespace HotPin
         {
             InitializeComponent();
             pictureBox.BackgroundImage = Application.Resources.HotPin;
-            textBox.Text = $"HotPin{Environment.NewLine}version {Application.Version}";
+            textBox.Text = $"HotPin{Environment.NewLine}Version {Application.Version}{Environment.NewLine}{RuntimeInformation.FrameworkDescription}";
             textBox.SelectionStart = 0;
         }
 
-        private void buttonLicence_Click(object sender, EventArgs e)
+        private void ButtonLicenceClick(object sender, EventArgs e)
         {
             Utils.StartProcess( Application.Licence );
         }
