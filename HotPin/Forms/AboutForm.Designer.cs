@@ -32,6 +32,7 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.textBox = new System.Windows.Forms.TextBox();
             this.buttonOk = new System.Windows.Forms.Button();
+            this.buttonLicence = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,6 +65,17 @@
             this.buttonOk.Text = "Ok";
             this.buttonOk.UseVisualStyleBackColor = true;
             // 
+            // buttonLicence
+            // 
+            this.buttonLicence.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonLicence.Location = new System.Drawing.Point(218, 135);
+            this.buttonLicence.Name = "buttonLicence";
+            this.buttonLicence.Size = new System.Drawing.Size(75, 23);
+            this.buttonLicence.TabIndex = 3;
+            this.buttonLicence.Text = "Licence";
+            this.buttonLicence.UseVisualStyleBackColor = true;
+            this.buttonLicence.Click += new System.EventHandler(this.buttonLicence_Click);
+            // 
             // AboutForm
             // 
             this.AcceptButton = this.buttonOk;
@@ -71,6 +83,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonOk;
             this.ClientSize = new System.Drawing.Size(384, 166);
+            this.Controls.Add(this.buttonLicence);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.pictureBox);
@@ -94,5 +107,6 @@
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.Button buttonOk;
+        private System.Windows.Forms.Button buttonLicence;
     }
 }

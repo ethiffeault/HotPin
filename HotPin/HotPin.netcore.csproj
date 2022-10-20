@@ -32,4 +32,10 @@
     <ProjectReference Include="..\HotPin.Core\HotPin.Core.netcore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

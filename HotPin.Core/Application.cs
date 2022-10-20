@@ -20,6 +20,7 @@ namespace HotPin
         public const string Name = "HotPin";
         public static string Version { get; } = ReadVersion();
         public static string Path { get; } = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName;
+        public static string Licence { get; } = System.IO.Path.Combine(Path, "LICENSE.txt");
 
         public HotKeyForm Form { get; private set; }
         public Project Project { get; private set; }
