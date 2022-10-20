@@ -20,14 +20,17 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore HotPin.netcore.sln
     - name: Build
-      run: dotnet build --no-restore -c Release HotPin.netcore.sln
+      run: dotnet build -c Release HotPin.netcore.sln
+    - name: Publish:
+      run: dotnet publish --output "output" --configuration Release --self-contained false HotPin.netcore.sln
+    - name: Generate Artifact Name
+      id: generate-name
+      run: |
+        echo "::set-output name=artifact::${{ github.event.repository.name }}.${{ github.ref_name }}.${{ github.run_id }}.zip"
     - name: Create Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: "hotpin_$GITHUB_SHA"
-        path: |
-          HotPin/bin/Release/net6.0-windows
+        name: ${{ steps.generate-name.outputs.artifact }}
+        path: ./output
 
