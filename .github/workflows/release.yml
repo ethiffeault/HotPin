@@ -48,6 +48,6 @@ jobs:
         draft: false
         prerelease: false
         release_name: ${{ steps.tag-name.outputs.tag }}
-        # tag_name: ${{ github.ref }}
+        tag_name: ${{ steps.tag-name.outputs.tag }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
