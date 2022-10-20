@@ -52,6 +52,7 @@
             this.menuItemRunning = new System.Windows.Forms.ToolStripMenuItem();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.projectControl = new HotPin.ProjectControl();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.menuStripMainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +76,8 @@
             this.menuItemRunning});
             this.menuStripMainMenu.Location = new System.Drawing.Point(0, 0);
             this.menuStripMainMenu.Name = "menuStripMainMenu";
-            this.menuStripMainMenu.Size = new System.Drawing.Size(1049, 24);
+            this.menuStripMainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.menuStripMainMenu.Size = new System.Drawing.Size(932, 24);
             this.menuStripMainMenu.TabIndex = 1;
             this.menuStripMainMenu.Text = "menuStrip1";
             // 
@@ -229,28 +231,44 @@
             // timer
             // 
             this.timer.Enabled = true;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.timer.Tick += new System.EventHandler(this.TimerTick);
             // 
             // projectControl
             // 
-            this.projectControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.projectControl.Location = new System.Drawing.Point(0, 24);
+            this.projectControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.projectControl.Location = new System.Drawing.Point(0, 27);
+            this.projectControl.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.projectControl.Name = "projectControl";
-            this.projectControl.Size = new System.Drawing.Size(1049, 437);
+            this.projectControl.Size = new System.Drawing.Size(932, 530);
             this.projectControl.TabIndex = 0;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar.Location = new System.Drawing.Point(0, 24);
+            this.progressBar.MarqueeAnimationSpeed = 10;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(938, 4);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar.TabIndex = 2;
+            this.progressBar.Value = 100;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 461);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(932, 557);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.projectControl);
             this.Controls.Add(this.menuStripMainMenu);
             this.MainMenuStrip = this.menuStripMainMenu;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "HotPin";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormClosing);
             this.menuStripMainMenu.ResumeLayout(false);
             this.menuStripMainMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -283,6 +301,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemHelpAbout;
         private System.Windows.Forms.ToolStripMenuItem menuItemRunning;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

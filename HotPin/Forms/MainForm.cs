@@ -65,7 +65,7 @@ namespace HotPin
             projectDirty = false;
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void MainFormClosing(object sender, FormClosingEventArgs e)
         {
             if (Application.Instance.DebugMode)
             {
@@ -160,15 +160,17 @@ namespace HotPin
             aboutForm.ShowDialog(this);
         }
 
-        private void timer_Tick(object sender, System.EventArgs e)
+        private void TimerTick(object sender, System.EventArgs e)
         {
             if (Application.Instance.Executor.IsRunnig)
             {
                 menuItemRunning.Image = Application.Resources.HotPin;
+                progressBar.Visible = true;
             }
             else
             {
                 menuItemRunning.Image = Application.Resources.HotPinGrey;
+                progressBar.Visible = false;
             }
         }
     }

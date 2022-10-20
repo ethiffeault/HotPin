@@ -18,6 +18,7 @@ namespace HotPin
         public static ApplicationSettings Settings { get => HotPin.Settings.Get<ApplicationSettings>(); }
         public const string Name = "HotPin";
         public static string Version { get; } = "0.0.2";
+        public static string Path { get; } = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName;
 
         public HotKeyForm Form { get; private set; }
         public Project Project { get; private set; }
@@ -33,6 +34,9 @@ namespace HotPin
 
         private NotifyIcon trayIcon;
         private bool closing = false;
+        private ContextMenuStrip trayIconMenu;
+        private ToolStripMenuItem trayIconItemHideShow;
+        private ToolStripMenuItem trayIconItemExit;
 
         // expose resources
         public static class Resources
@@ -73,15 +77,25 @@ namespace HotPin
                 Form.Visible = false;
 
             // Initialize Tray Icon
+            trayIconMenu = new ContextMenuStrip();
+            trayIconMenu.Opening += TrayIconMenuOpening;
+
+            trayIconItemHideShow = new ToolStripMenuItem("Hide/Show");
+            trayIconItemHideShow.Image = Core.Resources.HotPinGrey;
+            trayIconItemHideShow.Click += HideShowMainForm;
+            trayIconMenu.Items.Add(trayIconItemHideShow);
+
+            trayIconItemExit = new ToolStripMenuItem("Exit");
+            trayIconItemExit.Image = Core.Resources.Exit;
+            trayIconItemExit.Click += Exit;
+            trayIconMenu.Items.Add(trayIconItemExit);
+
             trayIcon = new NotifyIcon()
             {
                 Icon = Core.Resources.HotPinIcon,
-                ContextMenu = new ContextMenu(new MenuItem[] {
-                new MenuItem("Hide/Show", HideShowMainForm),
-                new MenuItem("Exit", Exit)
-            }),
+                ContextMenuStrip = trayIconMenu,
                 Visible = true
-            };
+            };            
 
             trayIcon.MouseDoubleClick += HideShowMainForm;
 
@@ -107,7 +121,19 @@ Have Fun!";
             }
         }
 
-        public static string Path { get => new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName; }
+        private void TrayIconMenuOpening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Form.Visible)
+            {
+                trayIconItemHideShow.Text = "Hide";
+                trayIconItemHideShow.Image = Core.Resources.HotPinGrey;
+            }
+            else
+            {
+                trayIconItemHideShow.Text = "Show";
+                trayIconItemHideShow.Image = Core.Resources.HotPin;
+            }
+        }
 
         private void LoadPlugins()
         {

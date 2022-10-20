@@ -43,7 +43,6 @@
             this.jsonControl = new HotPin.Controls.JsonControl();
             this.treeView = new HotPin.Controls.TreeView();
             this.textBoxDocumentation = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuFolder.SuspendLayout();
             this.contextMenuPlaylist.SuspendLayout();
             this.contextMenuCommand.SuspendLayout();
@@ -140,10 +139,11 @@
             this.jsonControl.Bookmark = true;
             this.jsonControl.BottomContextText = true;
             this.jsonControl.HScrollBar = true;
-            this.jsonControl.Location = new System.Drawing.Point(276, 3);
+            this.jsonControl.Location = new System.Drawing.Point(313, 3);
+            this.jsonControl.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.jsonControl.Name = "jsonControl";
             this.jsonControl.NumberMarge = false;
-            this.jsonControl.Size = new System.Drawing.Size(325, 406);
+            this.jsonControl.Size = new System.Drawing.Size(388, 473);
             this.jsonControl.TabIndex = 2;
             // 
             // treeView
@@ -152,39 +152,36 @@
             this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.treeView.ContextMenuStrip = this.contextMenuFolder;
-            this.treeView.Location = new System.Drawing.Point(3, 3);
+            this.treeView.Location = new System.Drawing.Point(4, 3);
+            this.treeView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(267, 406);
+            this.treeView.Size = new System.Drawing.Size(311, 468);
             this.treeView.TabIndex = 0;
             // 
             // textBoxDocumentation
             // 
             this.textBoxDocumentation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxDocumentation.Location = new System.Drawing.Point(607, 3);
+            this.textBoxDocumentation.Location = new System.Drawing.Point(708, 3);
+            this.textBoxDocumentation.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBoxDocumentation.Multiline = true;
             this.textBoxDocumentation.Name = "textBoxDocumentation";
             this.textBoxDocumentation.ReadOnly = true;
             this.textBoxDocumentation.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.textBoxDocumentation.Size = new System.Drawing.Size(310, 406);
+            this.textBoxDocumentation.Size = new System.Drawing.Size(361, 468);
             this.textBoxDocumentation.TabIndex = 3;
             this.textBoxDocumentation.WordWrap = false;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // ProjectControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.textBoxDocumentation);
             this.Controls.Add(this.jsonControl);
             this.Controls.Add(this.treeView);
             this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ProjectControl";
-            this.Size = new System.Drawing.Size(920, 415);
+            this.Size = new System.Drawing.Size(1073, 479);
             this.contextMenuFolder.ResumeLayout(false);
             this.contextMenuPlaylist.ResumeLayout(false);
             this.contextMenuCommand.ResumeLayout(false);
@@ -209,6 +206,5 @@
         private System.Windows.Forms.ToolStripMenuItem contextMenuCommandRun;
         private System.Windows.Forms.ToolStripMenuItem contextMenuPlaylistRun;
         private System.Windows.Forms.TextBox textBoxDocumentation;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

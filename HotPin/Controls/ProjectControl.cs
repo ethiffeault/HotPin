@@ -477,21 +477,31 @@ namespace HotPin
                 TreeNode treeNode = CreateTreeNode(newFolder);
                 parent.Add(treeNode);
                 SetSelectecedNode(treeNode);
+                ProjectChanged();
             }
         }
 
         private void AddNewPlaylist()
         {
-            if (selectedNode == null)
-                return;
+            TreeNodeCollection parent = null;
 
-            if (selectedNode.Tag is Folder)
+            if (selectedNode == null)
+            {
+                parent = treeView.Nodes;
+            }
+            else if (selectedNode.Tag is Folder)
+            {
+                parent = selectedNode.Nodes;
+            }
+
+            if (parent != null)
             {
                 Playlist newPlaylist = new Playlist();
                 newPlaylist.Name = "New Playlist";
                 TreeNode treeNode = CreateTreeNode(newPlaylist);
-                selectedNode.Nodes.Add(treeNode);
+                parent.Add(treeNode);
                 SetSelectecedNode(treeNode);
+                ProjectChanged();
             }
         }
 
@@ -505,6 +515,7 @@ namespace HotPin
                 TreeNode treeNode = CreateTreeNode(command);
                 selectedNode.Nodes.Add(treeNode);
                 SetSelectecedNode(treeNode);
+                ProjectChanged();
             }
         }
 
@@ -551,7 +562,6 @@ namespace HotPin
 
         private void ContextMenuFolderOpening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            contextMenuFolderAddPlaylist.Visible = selectedNode != null;
             contextMenuFolderDelete.Visible = selectedNode != null;
         }
 
