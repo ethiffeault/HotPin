@@ -1,0 +1,45 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: HotPin Build
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Build
+      run: dotnet build -c Release HotPin.netcore.sln
+    - name: Publish
+      run: dotnet publish --output "output" --configuration Release --self-contained false --runtime win-x64 HotPin.netcore.sln
+    - name: Generate Artifact Name
+      id: generate-name
+      run: |
+        echo "::set-output name=artifact::${{ github.event.repository.name }}.${{ github.ref_name }}.${{ github.run_id }}.zip"
+    - name: Copy HotPin.exe
+      run: cp HotPin.exe ./output/HotPin.exe
+    - name: Generate Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ steps.generate-name.outputs.artifact }}
+        path: ./output
+    - name: release
+        uses: actions/create-release@v1
+        id: create-release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.version.outputs.version }}
+          tag_name: ${{ github.ref }}
+
