@@ -51,12 +51,14 @@ jobs:
         tag_name: ${{ steps.tag-name.outputs.tag }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
+    - name: Zip Release
+      run: zip -r hotpin.zip ./output
     - name: Upload Release Artifact
       id: upload_release_artifact
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create-release.outputs.upload_url }}
-        asset_path: ./output
+        asset_path: ./hotpin.zip
         asset_name: "HotPin v${{ steps.tag-name.outputs.tag }}.zip"
         asset_content_type: application/zip
       env:
