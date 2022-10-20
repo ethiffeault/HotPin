@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -17,7 +18,7 @@ namespace HotPin
         public static Application Instance { get; } = new Application();
         public static ApplicationSettings Settings { get => HotPin.Settings.Get<ApplicationSettings>(); }
         public const string Name = "HotPin";
-        public static string Version { get; } = "0.0.2";
+        public static string Version { get; } = ReadVersion();
         public static string Path { get; } = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName;
 
         public HotKeyForm Form { get; private set; }
@@ -188,6 +189,21 @@ Have Fun!";
         {
             Project = Project.Load();
             ProjectLoaded?.Invoke();
+        }
+
+        private static string ReadVersion()
+        {
+            Assembly assembly = typeof(Application).Assembly;
+            //string resourceName = "HotPin.Core.version.txt";
+
+            string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("version.txt"));
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string version = reader.ReadToEnd();
+                return version;
+            }
         }
     }
 }

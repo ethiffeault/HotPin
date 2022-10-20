@@ -19,28 +19,39 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Build
-      id: build
-      run: dotnet build -c Release HotPin.netcore.sln
-    - name: Publish
-      id: publish
-      run: dotnet publish --output "output" --configuration Release --self-contained false --runtime win-x64 HotPin.netcore.sln
+
     - name: Artifact Name
       id: artifac-name
       run: |
         echo "::set-output name=artifact::${{ github.event.repository.name }}.${{ github.ref_name }}.${{ github.run_id }}.zip"
+
     - name: Tag Name
       id: tag-name
       run: |
-        echo "::set-output name=tag::${GITHUB_REF#refs/*/}"
+        echo "::set-output name=tag::${GITHUB_REF#refs/*/}"        
+
+    - name: Stamp Version
+      run: |
+        echo ${{ steps.tag-name.outputs.tag }} > HotPin.Core/version.txt
+
+    - name: Build
+      id: build
+      run: dotnet build -c Release HotPin.netcore.sln
+
+    - name: Publish
+      id: publish
+      run: dotnet publish --output "output" --configuration Release --self-contained false --runtime win-x64 HotPin.netcore.sln
+
     - name: Copy HotPin.exe
       run: cp HotPin.exe ./output/HotPin.exe
+
     - name: Generate Artifact
       id: generate-artifact
       uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.artifac-name.outputs.artifact }}
         path: ./output
+
     - name: Create Release
       id: create-release
       uses: actions/create-release@v1
@@ -51,8 +62,10 @@ jobs:
         tag_name: ${{ steps.tag-name.outputs.tag }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
+
     - name: Zip Release
       run: zip -jr hotpin.zip ./output/*.*
+
     - name: Upload Release Artifact
       id: upload_release_artifact
       uses: actions/upload-release-asset@v1

@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace HotPin
 {
@@ -8,7 +9,7 @@ namespace HotPin
         {
             InitializeComponent();
             pictureBox.BackgroundImage = Application.Resources.HotPin;
-            textBox.Text = $"HotPin\r\nversion {Application.Version}";
+            textBox.Text = $"HotPin{Environment.NewLine}version {Application.Version}";
             textBox.SelectionStart = 0;
         }
     }

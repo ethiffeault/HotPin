@@ -139,5 +139,8 @@
   <ItemGroup>
     <None Include="Resources\HotPinGrey.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="version.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
