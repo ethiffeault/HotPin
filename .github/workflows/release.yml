@@ -25,25 +25,29 @@ jobs:
     - name: Publish
       id: publish
       run: dotnet publish --output "output" --configuration Release --self-contained false --runtime win-x64 HotPin.netcore.sln
-    # - name: Generate Artifact Name
-    #   id: generate-artifac-name
-    #   run: |
-    #     echo "::set-output name=artifact::${{ github.event.repository.name }}.${{ github.ref_name }}.${{ github.run_id }}.zip"
-    # - name: Copy HotPin.exe
-    #   run: cp HotPin.exe ./output/HotPin.exe
-    # - name: Generate Artifact
-    #   id: generate-artifact
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: ${{ steps.generate-artifac-name.outputs.artifact }}
-    #     path: ./output
-    # - name: Create Release
-    #   id: create-release
-    #   uses: actions/create-release@v1
-    #   with:
-    #     draft: false
-    #     prerelease: false
-    #     release_name: ${{ steps.version.outputs.version }}
-    #     tag_name: ${{ github.ref }}
-    #   env:
-    #     GITHUB_TOKEN: ${{ github.token }}
+    - name: Artifact Name
+      id: artifac-name
+      run: |
+        echo "::set-output name=artifact::${{ github.event.repository.name }}.${{ github.ref_name }}.${{ github.run_id }}.zip"
+    - name: Tag Name
+      id: tag-name
+      run: |
+        echo "::set-output name=tag::${GITHUB_REF#refs/*/}"
+    - name: Copy HotPin.exe
+      run: cp HotPin.exe ./output/HotPin.exe
+    - name: Generate Artifact
+      id: generate-artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ steps.artifac-name.outputs.artifact }}
+        path: ./output
+    - name: Create Release
+      id: create-release
+      uses: actions/create-release@v1
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ steps.tag-name.outputs.tag }}
+        # tag_name: ${{ github.ref }}
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
