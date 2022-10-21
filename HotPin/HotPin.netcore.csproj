@@ -9,6 +9,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <RootNamespace>HotPin</RootNamespace>
     <AssemblyName>HotPin</AssemblyName>
+    <ApplicationIcon>HotPinIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -21,6 +22,10 @@
 
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="HotPinIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
