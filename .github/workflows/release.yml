@@ -23,12 +23,12 @@ jobs:
     - name: Artifact Name
       id: artifac-name
       run: |
-        echo "::set-output name=artifact::${{ github.event.repository.name }}.${{ github.ref_name }}.${{ github.run_id }}.zip"
+        echo "artifact=${{ github.event.repository.name }}.${{ github.ref_name }}.${{ github.run_id }}.zip" >> $GITHUB_OUTPUT
 
     - name: Tag Name
       id: tag-name
       run: |
-        echo "::set-output name=tag::${GITHUB_REF#refs/*/}"        
+      run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
 
     - name: Stamp Version
       run: |
@@ -43,7 +43,7 @@ jobs:
       run: dotnet publish --output "output" --configuration Release --self-contained false --runtime win-x64 HotPin.netcore.sln
 
     - name: Copy HotPin.exe
-      run: cp HotPin.exe ./output/HotPin.exe
+      run: cp ./HotPin/HotPin.exe ./output/HotPin.exe
 
     - name: Generate Artifact
       id: generate-artifact
