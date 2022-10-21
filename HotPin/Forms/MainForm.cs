@@ -49,7 +49,7 @@ namespace HotPin
             menuItemRunning.Text = "";
             menuItemRunning.Image = Application.Resources.HotPinGrey;
 
-            _ = CheckUpToDataVersion();
+            _ = CheckNewVersion();
         }
 
         private void ProjectLoaded()
@@ -179,7 +179,7 @@ namespace HotPin
             }
         }
 
-        private async Task CheckUpToDataVersion()
+        private async Task CheckNewVersion()
         {
             string latestVersion = await GitHub.GetLatestVersion(Application.ProjectOwner, Application.ProjectName);
 
