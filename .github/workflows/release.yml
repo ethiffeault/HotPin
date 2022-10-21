@@ -28,7 +28,7 @@ jobs:
     - name: Tag Name
       id: tag-name
       run: |
-      run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+        echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
 
     - name: Stamp Version
       run: |
