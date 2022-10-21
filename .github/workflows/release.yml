@@ -56,6 +56,7 @@ jobs:
       id: create-release
       uses: actions/create-release@v1
       with:
+        body: "HotPin v${{ steps.tag-name.outputs.tag }}"
         draft: false
         prerelease: false
         release_name: "HotPin v${{ steps.tag-name.outputs.tag }}"
