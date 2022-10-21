@@ -12,6 +12,14 @@ namespace HotPin
 {
     public static class GitHub
     {
+        public static async Task<string> GetLatestVersion(string owner, string project)
+        {
+            List<string> versions = await GetVersions(owner, project);
+            if (versions.Count == 0)
+                return null;
+            return versions[0];
+        }
+
         public static async Task<List<string>> GetVersions(string owner, string project)
         {
             string url = $"https://api.github.com/repos/{owner}/{project}/tags";

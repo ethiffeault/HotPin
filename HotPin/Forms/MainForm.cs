@@ -181,9 +181,9 @@ namespace HotPin
 
         private async Task CheckUpToDataVersion()
         {
-            List<string> versions = await GitHub.GetVersions(Application.ProjectOwner, Application.ProjectName);
+            string latestVersion = await GitHub.GetLatestVersion(Application.ProjectOwner, Application.ProjectName);
 
-            if (!versions.Contains(Application.Version))
+            if (latestVersion != null && Application.Version != latestVersion)
             {
                 newVersionAvailable = true;
                 menuItemRunning.Text = "New Version Available!";
