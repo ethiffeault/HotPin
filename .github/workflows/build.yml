@@ -5,9 +5,9 @@ name: Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "*" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "*" ]
 
 jobs:
   build:
@@ -17,26 +17,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
-      id: setup-net
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Build
-      id: build
+    - name: Build Release
       run: dotnet build -c Release HotPin.netcore.sln
-    - name: Publish
-      id: publish
-      run: dotnet publish --output "output" --configuration Release --self-contained false --runtime win-x64 HotPin.netcore.sln
-    - name: Generate Artifact Name
-      id: generate-artifac-name
-      run: |
-        echo "::set-output name=artifact::${{ github.event.repository.name }}.${{ github.ref_name }}.${{ github.run_id }}.zip"
-    - name: Copy HotPin.exe
-      run: cp HotPin.exe ./output/HotPin.exe
-    - name: Generate Artifact
-      id: generate-artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: ${{ steps.generate-artifac-name.outputs.artifact }}
-        path: ./output
+    - name: Build Debug
+      run: dotnet build -c Debug HotPin.netcore.sln
+
 
