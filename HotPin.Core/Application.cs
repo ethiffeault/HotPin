@@ -25,6 +25,7 @@ namespace HotPin
         public static string Licence { get; } = System.IO.Path.Combine(Path, "LICENSE.txt");
         public const string ProjectHome = "https://github.com/ethiffeault/HotPin";
         public const string ProjectRelease = "https://github.com/ethiffeault/HotPin/releases";
+        public const string HelpUrl = "https://github.com/ethiffeault/HotPin/wiki";
         public const string ProjectOwner = "ethiffeault";
         public const string ProjectName = "HotPin";
 
@@ -223,7 +224,7 @@ Have Fun!";
 
             if (result == DialogResult.OK)
             {
-                string body = $"<Enter description here>\n\nHotPin v{Version}\n<b>{e.Message}</b>\n\n```{e.StackTrace}```";
+                string body = $"<Enter description here>\n\nHotPin v{Version}\n<b>{e.Message}</b>\n\n```\n{e.StackTrace}\n```";
                 string url = GitHub.GetCreateIssueUrl(ProjectOwner, ProjectName, label: GitHub.Label.Bug, body: body);
                 Utils.StartProcess(url);
                 trayIcon.Visible = false;

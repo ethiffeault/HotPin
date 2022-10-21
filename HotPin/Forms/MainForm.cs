@@ -222,5 +222,10 @@ namespace HotPin
             Form crashTestForm = null;
             crashTestForm.Visible = true;
         }
+
+        private void MenuItemHelpViewHelpClick(object sender, System.EventArgs e)
+        {
+            Utils.StartProcess(Application.HelpUrl);
+        }
     }
 }
