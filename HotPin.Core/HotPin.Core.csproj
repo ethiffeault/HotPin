@@ -36,6 +36,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -55,6 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\CrashHandler.cs" />
     <Compile Include="Utils\GitHub.cs" />
     <Compile Include="Utils\HotKey.cs" />
     <Compile Include="Items\Item.cs" />
@@ -142,6 +145,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="version.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Problem.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

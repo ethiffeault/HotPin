@@ -63,6 +63,16 @@ namespace HotPin.Core {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Chat {
+            get {
+                object obj = ResourceManager.GetObject("Chat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Command {
             get {
                 object obj = ResourceManager.GetObject("Command", resourceCulture);
@@ -246,6 +256,16 @@ namespace HotPin.Core {
         internal static System.Drawing.Bitmap Plus {
             get {
                 object obj = ResourceManager.GetObject("Plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Problem {
+            get {
+                object obj = ResourceManager.GetObject("Problem", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

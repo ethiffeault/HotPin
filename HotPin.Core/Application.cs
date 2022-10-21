@@ -11,6 +11,8 @@ namespace HotPin
     public class ApplicationSettings : Settings.Entry
     {
         public bool ShowWelcomeScreen = true;
+        public bool DebugMode = false;
+        public bool ShowCrashButton = false;
     }
 
     public class Application : ApplicationContext
@@ -29,7 +31,7 @@ namespace HotPin
         public HotKeyForm Form { get; private set; }
         public Project Project { get; private set; }
         public Executor Executor { get; private set; }
-        public bool DebugMode { get; } = System.Diagnostics.Debugger.IsAttached;
+        public static bool DebugMode { get; private set; } = System.Diagnostics.Debugger.IsAttached;
         public List<Assembly> CommandAssemblies { get; private set; } = new List<Assembly>();
 
         public Action ProjectSaving;
@@ -64,6 +66,8 @@ namespace HotPin
             public static readonly Image Plus = Core.Resources.Plus;
             public static readonly Image Minus = Core.Resources.Minus;
             public static readonly Image Playlist = Core.Resources.Playlist;
+            public static readonly Image Chat = Core.Resources.Chat;
+            public static readonly Image Problem = Core.Resources.Problem;
         }
 
         public Application()
@@ -72,6 +76,10 @@ namespace HotPin
 
         public void Init(HotKeyForm form)
         {
+            DebugMode = System.Diagnostics.Debugger.IsAttached || Settings.DebugMode;
+            CrashHandler.Init(DebugMode);
+            CrashHandler.Crashed += Crashed;
+
             Log.DefaultContext = Application.Name;
             Log.Info("Starting HotPin!");
 
@@ -101,7 +109,7 @@ namespace HotPin
                 Icon = Core.Resources.HotPinIcon,
                 ContextMenuStrip = trayIconMenu,
                 Visible = true
-            };            
+            };
 
             trayIcon.MouseDoubleClick += HideShowMainForm;
 
@@ -205,6 +213,18 @@ Have Fun!";
             {
                 string version = reader.ReadToEnd();
                 return version.Trim(' ', '\r', '\n');
+            }
+        }
+
+        private void Crashed(Exception e)
+        {
+            DialogResult result = MessageBoxEx.Show("HotPin crashed, please report it.", "HotPin", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+
+            if (result == DialogResult.OK)
+            {
+                string body = $"<Enter description here>\n\nHotPin v{Version}\n{e.Message}\n\n{e.StackTrace}";
+                string url = GitHub.GetCreateIssueUrl(ProjectOwner, ProjectName, label: GitHub.Label.Bug, body: body);
+                Utils.StartProcess(url);
             }
         }
     }

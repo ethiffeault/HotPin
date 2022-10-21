@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -19,7 +18,7 @@ namespace HotPin
 
         private void ButtonLicenceClick(object sender, EventArgs e)
         {
-            Utils.StartProcess( Application.Licence );
+            Utils.StartProcess(Application.Licence);
         }
 
         private void LinkLabelWebPageLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

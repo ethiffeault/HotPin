@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HotPin
@@ -45,11 +44,20 @@ namespace HotPin
             menuItemDebugLogLevelError.Image = Application.Resources.Error;
 
             menuItemHelpAbout.Image = Application.Resources.HotPin;
+            menuItemHelpFeedbackFeature.Image = Application.Resources.Chat;
+            menuItemHelpFeedbackProblem.Image = Application.Resources.Problem;
 
             menuItemRunning.Text = "";
             menuItemRunning.Image = Application.Resources.HotPinGrey;
 
+            menuItemDebugCrash.Visible = Application.Settings.ShowCrashButton || Application.DebugMode;
+
             _ = CheckNewVersion();
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
         }
 
         private void ProjectLoaded()
@@ -72,7 +80,7 @@ namespace HotPin
 
         private void MainFormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Application.Instance.DebugMode)
+            if (Application.DebugMode)
             {
                 debugClose = true;
                 Application.Instance.Exit();
@@ -195,6 +203,24 @@ namespace HotPin
                 Utils.StartProcess($"{Application.ProjectRelease}/tag/{latestVersion}");
             else
                 Utils.StartProcess(Application.ProjectHome);
+        }
+
+        private void MenuItemHelpFeedbackProblemClick(object sender, System.EventArgs e)
+        {
+            string url = GitHub.GetCreateIssueUrl(Application.ProjectOwner, Application.ProjectName, label: GitHub.Label.Bug);
+            Utils.StartProcess(url);
+        }
+
+        private void MenuItemHelpFeedbackFeatureClick(object sender, System.EventArgs e)
+        {
+            string url = GitHub.GetCreateIssueUrl(Application.ProjectOwner, Application.ProjectName, label: GitHub.Label.Enhancement);
+            Utils.StartProcess(url);
+        }
+
+        private void MenuItemDebugCrashClick(object sender, System.EventArgs e)
+        {
+            Form crashTestForm = null;
+            crashTestForm.Visible = true;
         }
     }
 }

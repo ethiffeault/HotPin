@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using JsonObject = System.Collections.Generic.Dictionary<string, object>;
-using JsonList = System.Collections.Generic.List<object>;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using JsonList = System.Collections.Generic.List<object>;
+using JsonObject = System.Collections.Generic.Dictionary<string, object>;
 
 namespace HotPin
 {
     public static class GitHub
     {
+        public enum Label
+        {
+            None,
+            Bug,
+            Enhancement
+        }
+
         public static async Task<string> GetLatestVersion(string owner, string project)
         {
             List<string> versions = await GetVersions(owner, project);
@@ -62,6 +67,31 @@ namespace HotPin
             catch (Exception) { }
 
             return versions;
+        }
+
+        public static string GetCreateIssueUrl(string owner, string project, string title = null, string body = null, Label label = Label.None)
+        {
+            string url = $"https://github.com/{owner}/{project}/issues/new";
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+            if (title != null)
+                parameters.Add("title", title);
+            if (body != null)
+                parameters.Add("body", body);
+            if (label != Label.None)
+                parameters.Add("labels", label.ToString().ToLower());
+
+            char separator = '?';
+            foreach (var p in parameters)
+            {
+                string name = p.Key;
+                string value = Uri.EscapeDataString(p.Value);
+                url += $"{separator}{name}={value}";
+                separator = '&';
+            }
+
+            return url;
         }
     }
 }

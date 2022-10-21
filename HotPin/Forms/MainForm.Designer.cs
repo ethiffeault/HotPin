@@ -47,7 +47,11 @@
             this.menuItemDebugLogLevelInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDebugLogLevelWarning = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDebugLogLevelError = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDebugCrash = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sendFeedbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemHelpFeedbackProblem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemHelpFeedbackFeature = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemRunning = new System.Windows.Forms.ToolStripMenuItem();
             this.timer = new System.Windows.Forms.Timer(this.components);
@@ -149,7 +153,8 @@
             // menuItemDebug
             // 
             this.menuItemDebug.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemDebugLog});
+            this.menuItemDebugLog,
+            this.menuItemDebugCrash});
             this.menuItemDebug.Name = "menuItemDebug";
             this.menuItemDebug.Size = new System.Drawing.Size(54, 20);
             this.menuItemDebug.Text = "Debug";
@@ -161,7 +166,7 @@
             this.separator2,
             this.menuItemDebugLogLevel});
             this.menuItemDebugLog.Name = "menuItemDebugLog";
-            this.menuItemDebugLog.Size = new System.Drawing.Size(94, 22);
+            this.menuItemDebugLog.Size = new System.Drawing.Size(180, 22);
             this.menuItemDebugLog.Text = "Log";
             this.menuItemDebugLog.DropDownOpened += new System.EventHandler(this.MenuItemDebugLogLevelDropDownOpened);
             // 
@@ -204,18 +209,49 @@
             this.menuItemDebugLogLevelError.Text = "Error";
             this.menuItemDebugLogLevelError.Click += new System.EventHandler(this.MenuItemDebugLogLevelErrorClick);
             // 
+            // menuItemDebugCrash
+            // 
+            this.menuItemDebugCrash.Name = "menuItemDebugCrash";
+            this.menuItemDebugCrash.Size = new System.Drawing.Size(180, 22);
+            this.menuItemDebugCrash.Text = "Crash";
+            this.menuItemDebugCrash.Click += new System.EventHandler(this.MenuItemDebugCrashClick);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sendFeedbackToolStripMenuItem,
             this.menuItemHelpAbout});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // sendFeedbackToolStripMenuItem
+            // 
+            this.sendFeedbackToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemHelpFeedbackProblem,
+            this.menuItemHelpFeedbackFeature});
+            this.sendFeedbackToolStripMenuItem.Name = "sendFeedbackToolStripMenuItem";
+            this.sendFeedbackToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.sendFeedbackToolStripMenuItem.Text = "Send Feedback";
+            // 
+            // menuItemHelpFeedbackProblem
+            // 
+            this.menuItemHelpFeedbackProblem.Name = "menuItemHelpFeedbackProblem";
+            this.menuItemHelpFeedbackProblem.Size = new System.Drawing.Size(176, 22);
+            this.menuItemHelpFeedbackProblem.Text = "Report a Problem...";
+            this.menuItemHelpFeedbackProblem.Click += new System.EventHandler(this.MenuItemHelpFeedbackProblemClick);
+            // 
+            // menuItemHelpFeedbackFeature
+            // 
+            this.menuItemHelpFeedbackFeature.Name = "menuItemHelpFeedbackFeature";
+            this.menuItemHelpFeedbackFeature.Size = new System.Drawing.Size(176, 22);
+            this.menuItemHelpFeedbackFeature.Text = "Suggest a Feature...";
+            this.menuItemHelpFeedbackFeature.Click += new System.EventHandler(this.MenuItemHelpFeedbackFeatureClick);
+            // 
             // menuItemHelpAbout
             // 
             this.menuItemHelpAbout.Name = "menuItemHelpAbout";
-            this.menuItemHelpAbout.Size = new System.Drawing.Size(116, 22);
+            this.menuItemHelpAbout.Size = new System.Drawing.Size(153, 22);
             this.menuItemHelpAbout.Text = "About...";
             this.menuItemHelpAbout.Click += new System.EventHandler(this.MenuItemHelpAboutClick);
             // 
@@ -303,6 +339,10 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemRunning;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.ToolStripMenuItem sendFeedbackToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuItemHelpFeedbackProblem;
+        private System.Windows.Forms.ToolStripMenuItem menuItemHelpFeedbackFeature;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDebugCrash;
     }
 }
 
