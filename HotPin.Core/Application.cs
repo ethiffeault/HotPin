@@ -204,8 +204,7 @@ Have Fun!";
             using (StreamReader reader = new StreamReader(stream))
             {
                 string version = reader.ReadToEnd();
-                MessageBoxEx.Show($"\"{version}\"");
-                return version.Trim();
+                return version.Trim(' ', '\r', '\n');
             }
         }
     }
