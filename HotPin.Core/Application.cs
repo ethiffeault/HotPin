@@ -32,6 +32,7 @@ namespace HotPin
         public Project Project { get; private set; }
         public Executor Executor { get; private set; }
         public static bool DebugMode { get; private set; } = System.Diagnostics.Debugger.IsAttached;
+        public static bool DisableCrashReportDebug = false; // set to true to debug crash reporting
         public List<Assembly> CommandAssemblies { get; private set; } = new List<Assembly>();
 
         public Action ProjectSaving;
@@ -77,7 +78,7 @@ namespace HotPin
         public void Init(HotKeyForm form)
         {
             DebugMode = System.Diagnostics.Debugger.IsAttached || Settings.DebugMode;
-            CrashHandler.Init(DebugMode);
+            CrashHandler.Init(DebugMode && !DisableCrashReportDebug);
             CrashHandler.Crashed += Crashed;
 
             Log.DefaultContext = Application.Name;
@@ -222,9 +223,10 @@ Have Fun!";
 
             if (result == DialogResult.OK)
             {
-                string body = $"<Enter description here>\n\nHotPin v{Version}\n{e.Message}\n\n{e.StackTrace}";
+                string body = $"<Enter description here>\n\nHotPin v{Version}\n<b>{e.Message}</b>\n\n```{e.StackTrace}```";
                 string url = GitHub.GetCreateIssueUrl(ProjectOwner, ProjectName, label: GitHub.Label.Bug, body: body);
                 Utils.StartProcess(url);
+                trayIcon.Visible = false;
             }
         }
     }
