@@ -33,6 +33,7 @@
             this.textBox = new System.Windows.Forms.TextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonLicence = new System.Windows.Forms.Button();
+            this.linkLabelWebPage = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,6 +77,17 @@
             this.buttonLicence.UseVisualStyleBackColor = true;
             this.buttonLicence.Click += new System.EventHandler(this.ButtonLicenceClick);
             // 
+            // linkLabelWebPage
+            // 
+            this.linkLabelWebPage.AutoSize = true;
+            this.linkLabelWebPage.Location = new System.Drawing.Point(13, 135);
+            this.linkLabelWebPage.Name = "linkLabelWebPage";
+            this.linkLabelWebPage.Size = new System.Drawing.Size(47, 13);
+            this.linkLabelWebPage.TabIndex = 4;
+            this.linkLabelWebPage.TabStop = true;
+            this.linkLabelWebPage.Text = "http://...";
+            this.linkLabelWebPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelWebPageLinkClicked);
+            // 
             // AboutForm
             // 
             this.AcceptButton = this.buttonOk;
@@ -83,6 +95,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonOk;
             this.ClientSize = new System.Drawing.Size(384, 166);
+            this.Controls.Add(this.linkLabelWebPage);
             this.Controls.Add(this.buttonLicence);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.textBox);
@@ -108,5 +121,6 @@
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonLicence;
+        private System.Windows.Forms.LinkLabel linkLabelWebPage;
     }
 }

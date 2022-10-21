@@ -227,6 +227,7 @@
             this.menuItemRunning.Size = new System.Drawing.Size(64, 20);
             this.menuItemRunning.Text = "Running";
             this.menuItemRunning.ToolTipText = "Running State";
+            this.menuItemRunning.Click += new System.EventHandler(this.MenuItemRunningClick);
             // 
             // timer
             // 

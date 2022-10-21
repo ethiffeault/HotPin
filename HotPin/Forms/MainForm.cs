@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace HotPin
 {
@@ -9,6 +11,7 @@ namespace HotPin
         private bool forceClose = false;
         private bool debugClose = false;
         private bool projectDirty = false;
+        private bool newVersionAvailable = false;
 
         public MainForm()
         {
@@ -45,6 +48,8 @@ namespace HotPin
 
             menuItemRunning.Text = "";
             menuItemRunning.Image = Application.Resources.HotPinGrey;
+
+            _ = CheckUpToDataVersion();
         }
 
         private void ProjectLoaded()
@@ -172,6 +177,25 @@ namespace HotPin
                 menuItemRunning.Image = Application.Resources.HotPinGrey;
                 progressBar.Visible = false;
             }
+        }
+
+        private async Task CheckUpToDataVersion()
+        {
+            List<string> versions = await GitHub.GetVersions(Application.ProjectOwner, Application.ProjectName);
+
+            if (!versions.Contains(Application.Version))
+            {
+                newVersionAvailable = true;
+                menuItemRunning.Text = "New Version Available!";
+            }
+        }
+
+        private void MenuItemRunningClick(object sender, System.EventArgs e)
+        {
+            if (newVersionAvailable)
+                Utils.StartProcess(Application.ProjectRelease);
+            else
+                Utils.StartProcess(Application.ProjectHome);
         }
     }
 }

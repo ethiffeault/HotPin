@@ -21,6 +21,10 @@ namespace HotPin
         public static string Version { get; } = ReadVersion();
         public static string Path { get; } = new FileInfo(System.Reflection.Assembly.GetEntryAssembly().Location).DirectoryName;
         public static string Licence { get; } = System.IO.Path.Combine(Path, "LICENSE.txt");
+        public const string ProjectHome = "https://github.com/ethiffeault/HotPin";
+        public const string ProjectRelease = "https://github.com/ethiffeault/HotPin/releases";
+        public const string ProjectOwner = "ethiffeault";
+        public const string ProjectName = "HotPin";
 
         public HotKeyForm Form { get; private set; }
         public Project Project { get; private set; }
