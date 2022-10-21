@@ -11,7 +11,7 @@ namespace HotPin
         private bool forceClose = false;
         private bool debugClose = false;
         private bool projectDirty = false;
-        private bool newVersionAvailable = false;
+        private string latestVersion = null;
 
         public MainForm()
         {
@@ -181,19 +181,18 @@ namespace HotPin
 
         private async Task CheckNewVersion()
         {
-            string latestVersion = await GitHub.GetLatestVersion(Application.ProjectOwner, Application.ProjectName);
+            latestVersion = await GitHub.GetLatestVersion(Application.ProjectOwner, Application.ProjectName);
 
             if (latestVersion != null && Application.Version != latestVersion)
             {
-                newVersionAvailable = true;
                 menuItemRunning.Text = "New Version Available!";
             }
         }
 
         private void MenuItemRunningClick(object sender, System.EventArgs e)
         {
-            if (newVersionAvailable)
-                Utils.StartProcess(Application.ProjectRelease);
+            if (latestVersion != null && Application.Version != latestVersion)
+                Utils.StartProcess($"{Application.ProjectRelease}/tag/{latestVersion}");
             else
                 Utils.StartProcess(Application.ProjectHome);
         }

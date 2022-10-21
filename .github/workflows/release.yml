@@ -56,7 +56,7 @@ jobs:
       id: create-release
       uses: actions/create-release@v1
       with:
-        body: "HotPin v${{ steps.tag-name.outputs.tag }}"
+        body: "<img src="https://raw.githubusercontent.com/ethiffeault/HotPin/main/HotPin.Core/Resources/HotPin.png" width="32" height="32"> HotPin v${{ steps.tag-name.outputs.tag }}"
         draft: false
         prerelease: false
         release_name: "HotPin v${{ steps.tag-name.outputs.tag }}"
